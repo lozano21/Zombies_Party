@@ -5,13 +5,11 @@ window.onload = function(){
     
     var coordenadas = 0;
     coordenadas = parseInt(prompt("Medida del tablero "));
-    do{
-        alert("Por favor introduce la medida, entre 5 y 10");
+    while(coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20){//bucle do while para el tamaño de la tabla
+        alert("Por favor introduce la medida, entre 5 y 20");
         coordenadas = parseInt(prompt("Medida del tablero (5-20)"));
-    }while(coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20)//bucle do while para
-    console.log(coordenadas);
-
-    document.getElementById("mostrarTabla").innerHTML = generarTabla(coordenadas);
+        console.log(coordenadas);
+    }
 
     function generarTabla(tabla){
         var cella = "<table>";
@@ -26,8 +24,8 @@ window.onload = function(){
 
         return tabla;
     }
-    var tablero = new generarTabla(5);
-    document.write(tablero.cella)
+    var tablero = new generarTabla();
+    document.write(tablero.cella);
 
 }
 
