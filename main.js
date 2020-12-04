@@ -5,27 +5,48 @@ window.onload = function(){
     
     var coordenadas = 0;
     coordenadas = parseInt(prompt("Medida del tablero "));
+
     while(coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20){//bucle do while para el tamaño de la tabla
+
         alert("Por favor introduce la medida, entre 5 y 20");
         coordenadas = parseInt(prompt("Medida del tablero (5-20)"));
         console.log(coordenadas);
+
     }
 
-    function generarTabla(tabla){
-        var cella = "<table>";
-        for(let i = 0; i < tabla.length;i++){
-            cella += "<tr>";
-            for(let j = 0; i < tabla[i].length;j++){
-                cella += "<td>" + tabla[i][j]+"</td>"
+    function generarTabla(){
+
+        let body = document.getElementsByTagName("body")[0];
+
+        let table = document.createElement("table");
+        let tbody = document.createElement("tbody");
+
+        for (let i = 0; i < coordenadas; i++){
+
+            let row = document.createElement("tr");
+
+            for (let j = 0; j < coordenadas; j++){
+
+                let cell = document.createElement("td");
+                let text = document.createTextNode(i + "" + j);
+
+                cell.appendChild(text);
+                row.appendChild(cell);
+
             }
-            cella += "</tr>";
-        }
-        cella += "</table>";
 
-        return tabla;
+
+            tbody.appendChild(row);
+        }
+
+        table.appendChild(tbody);
+        body.appendChild(table);
+
+        table.setAttribute('border', 2);
+        table.setAttribute('id', 'table');
+
     }
-    var tablero = new generarTabla();
-    document.write(tablero.cella);
+    generarTabla();
 
 }
 
