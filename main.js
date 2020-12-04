@@ -1,4 +1,6 @@
 //main
+
+//generar tabla
 window.onload = function(){
     
     var coordenadas = 0;
@@ -29,3 +31,13 @@ window.onload = function(){
 
 }
 
+//Objecte pare elements
+var Elements = function(nom){
+    var nom = nom;
+    this.getNom = function(){
+        return nom;
+    }
+    this.setNom = function(_nom){
+        nom = _nom;
+    }
+}
