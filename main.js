@@ -28,3 +28,4 @@ window.onload = function(){
     document.write(tablero.cella)
 
 }
+
