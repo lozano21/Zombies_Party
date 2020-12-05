@@ -24,8 +24,8 @@ window.onload = function(){
 
         return tabla;
     }
-    var tablero = new generarTabla();
-    document.write(tablero.cella);
+  
+    
 
 }
 
