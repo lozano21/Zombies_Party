@@ -46,12 +46,7 @@ window.onload = function(){
         table.setAttribute('id', 'table');
 
     }
-<<<<<<< HEAD
-  
-    
-=======
     generarTabla();
->>>>>>> 8ed08a199df93102b1e56affb1fba5d0fb144bb0
 
 }
 
