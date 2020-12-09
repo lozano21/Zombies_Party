@@ -28,9 +28,7 @@ window.onload = function(){
             for (let j = 0; j < coordenadas; j++){
 
                 let cell = document.createElement("td");
-                let text = document.createTextNode(i + "" + j);
 
-                cell.appendChild(text);
                 row.appendChild(cell);
 
             }
