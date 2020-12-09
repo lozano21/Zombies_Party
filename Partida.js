@@ -32,16 +32,4 @@ let Partida = {
         table.setAttribute('id', 'table');
 
     },
-
-//Objecte pare elements
-     Elements: function(nom){
-        var nom = nom;
-        this.getNom = function(){
-            return nom;
-        }
-        this.setNom = function(_nom){
-            nom = _nom;
-        }
-    }
-
 }
