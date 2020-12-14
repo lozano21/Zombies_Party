@@ -1,7 +1,8 @@
 let Partida = {
     zombies: [],
     estrelles:[],
-
+    tablero: [0],
+    
     generarTabla: function(coordenadas){
 
         let body = document.getElementsByTagName("body")[0];
@@ -16,6 +17,7 @@ let Partida = {
             for (let j = 0; j < coordenadas; j++){
 
                 let cell = document.createElement("td");
+                cell.appendChild(this.tablero[i][j]);
 
                 row.appendChild(cell);
 
@@ -32,13 +34,17 @@ let Partida = {
 
     },
 
-    rellenarTabla: function(){
+    rellenarTabla: function(coordenadas){
         for(let i = 0;i<coordenadas;i++){
+            this.tablero[i]= [];
             for(let j = 0;j < coordenadas[i];j++){
-               element.coordenadas[i][j].InnerHTML = "g";
+               this.tablero[i][j] = "g";
             }
         }
+        this.generarTabla();
     },
+    
+   
 
 
 }
