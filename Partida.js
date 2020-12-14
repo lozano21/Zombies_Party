@@ -21,7 +21,6 @@ let Partida = {
 
             }
 
-
             tbody.appendChild(row);
         }
 
@@ -32,4 +31,14 @@ let Partida = {
         table.setAttribute('id', 'table');
 
     },
+
+    rellenarTabla: function(){
+        for(let i = 0;i<coordenadas;i++){
+            for(let j = 0;j < coordenadas[i];j++){
+               element.coordenadas[i][j].InnerHTML = "g";
+            }
+        }
+    },
+
+
 }
