@@ -23,7 +23,6 @@ let Partida = {
 
             }
 
-
             tbody.appendChild(row);
         }
 
@@ -44,7 +43,7 @@ let Partida = {
 
             for (let j = 0; j < coordenadas; j++){
 
-                tablero += "<td id=" + num + "> x </td>";
+                tablero += "<td id=" + num + "> g </td>";
                 num+=1;
                 console.log(num);
 
@@ -60,3 +59,16 @@ let Partida = {
 
     },
 }
+/*
+
+    rellenarTabla: function(){
+        for(let i = 0;i<coordenadas;i++){
+            for(let j = 0;j < coordenadas[i];j++){
+               element.coordenadas[i][j].InnerHTML = "g";
+            }
+        }
+    },
+
+
+}
+*/
