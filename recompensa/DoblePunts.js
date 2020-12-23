@@ -1,4 +1,8 @@
 //Objecte fill recompensa
-var puntsDobles = function(nom){
-    this.posicio;
-}
+let puntsDobles = function(){
+        Recompensa.apply(this, arguments);
+}        
+    /*Prototype = hijo*/
+    puntsDobles.prototype = Object.create(Recompensa.prototype);
+    puntsDobles.prototype.constructor = Recompensa;
+

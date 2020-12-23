@@ -15,7 +15,7 @@ window.onload = function(){
     }
 
     Partida.generarTabla(coordenadas);
-    Partida.rellenarTabla(coordenadas);
+    Partida.iniciarTablero(coordenadas);
 }
 
 

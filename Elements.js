@@ -1,6 +1,8 @@
 //Objecte pare elements
-let Elements = function(){
+var Elements = function(x,y){
 
-
+this.x = x;
+this.y = y;
+var seleccionado = false;
 
 }
