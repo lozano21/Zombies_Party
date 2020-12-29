@@ -10,39 +10,26 @@ var Partida = {
     vidaExtra: [],
     zombiesCreados: 0,
     estrellasCreadas: 0,
-   
-
-    //------ZOMBIES-----------------
-    crearZombies: function(Cz){
-        while(this.zombiesCreados < (this.medidaTablero * this.medidaTablero) / 4){
-            do{
-                var x = Math.floor(Math.random() * this.medidaTablero) + 1;
-                var y = Math.floor(Math.random() * this.medidaTablero) + 1;
-            }while(this.tablero[x][y])
-            Cz.x = X;
-            Cz.y = Y;
-            this.tablero[x][y] = "z";
-            this.zombiesCreados ++;
-            this.zombies.push(Cz);
+    
+    iniciarTablero: function(coordenadas){
+        for(let i=0;i < coordenadas; i++){
+            this.tablero[i] = [];
+            for(let j = 0; j < coordenadas;j++ ){
+                this.tablero[i][j] = "g";
+                
+            }
         }
+        console.log(this.tablero)
     },
 
-
-    //-------Estrelles--------------
-    crearZombies: function(Ce){
-        while(this.zombiesCreados < (this.medidaTablero * this.medidaTablero) / 4){
-            do{
-                var x = Math.floor(Math.random() * this.medidaTablero) + 1;
-                var y = Math.floor(Math.random() * this.medidaTablero) + 1;
-            }while(this.tablero[x][y])
-            Ce.x = X;
-            Ce.y = Y;
-            this.tablero[x][y] = "e";
-            this.estrellasCreadas ++;
-            this.estrelles.push(Ce);
-        }
+    iniciarJuego: function(){
+       
+        this.crearRecompenses();
+        this.crearZombies();
+        this.crearEstrelles();
+        this.iniciarTablero(); 
+        this.generarTabla(coordenadas);
     },
-
 
     //-------RECOMPENSAS------------
     crearRecompenses: function(){
@@ -54,7 +41,8 @@ var Partida = {
     },
 
     crearDoblePunts: function(cDP){
-         do{
+        try{
+            do{
             var x = Math.floor(Math.random() * this.medidaTablero) + 1;
             var y = Math.floor(Math.random() * this.medidaTablero) + 1;
         }while(this.tablero[x][y] != "g");
@@ -63,14 +51,16 @@ var Partida = {
         this.tablero[X][Y] = "d";
         this.recompensasCreadas += 1;
         this.doblePuntos.push(cDP);
+        }
+        catch(e){}
         
 
     },
 
     crearMeitatZombi: function(cMZ){
 
+        try{
         let orientacion = Math.floor(Mat.random() * 2);
-
         if(orientacion == 0){
             do{
                 var x = Math.floor(Math.random() * this.medidaTablero) + 1;
@@ -96,11 +86,14 @@ var Partida = {
             this.recompensasCreadas += 2;
         }
         this.meitatZombie.push(cMZ);
+        }
+        catch(e){}
+
 
     },
 
     crearVidaExtra: function(cVE){
-        
+       try{ 
         videsExtres(3);
         let orientacion = Math.floor(Math.random() * 2)
         if(orientacion == 0){
@@ -131,7 +124,62 @@ var Partida = {
             this.recompensasCreadas += 3;
         }
         this.vidaExtra.push(cVE);
+        }
+        catch(e){}
     },
+
+    //------ZOMBIES-----------------
+    crearZombies: function(Cz){
+        while(this.zombiesCreados < (this.medidaTablero * this.medidaTablero) / 4){
+            do{
+                var x = Math.floor(Math.random() * this.medidaTablero) + 1;
+                var y = Math.floor(Math.random() * this.medidaTablero) + 1;
+            }while(this.tablero[x][y])
+            Cz.x = X;
+            Cz.y = Y;
+            this.tablero[x][y] = "z";
+            this.zombiesCreados ++;
+            this.zombies.push(Cz);
+        }
+    },
+
+
+    //-------Estrelles--------------
+    crearEstrelles: function(Ce){
+        try{
+        while(this.estrellasCreadas < (this.medidaTablero * this.medidaTablero) / 4){
+            do{
+                var x = Math.floor(Math.random() * this.medidaTablero) + 1;
+                var y = Math.floor(Math.random() * this.medidaTablero) + 1;
+            }while(this.tablero[x][y])
+            Ce.x = X;
+            Ce.y = Y;
+            this.tablero[x][y] = "e";
+            this.estrellasCreadas ++;
+            this.estrelles.push(Ce);
+        }
+        }
+        catch(e){}
+
+    },
+
+    seleccionarCoordenada: function(){
+        posX = document.getElementById("posX").value;
+        podY = document.getElementById("posY").value;
+
+        if(posX >= 0 && posX < Partida.medidaTablero && posY >= 0 && posY < Partida.medidaTablero  ){
+            var ficha = Partida.tablero[posX][posY];
+            if(ficha.toString() === ficha.toLoweCase()){
+                document.getElementById(x.toString() + y.toString()).innerHTML = ficha.toUpperCase();
+                Partida.tablero[posX][posY] =  ficha.toUpperCase();
+            }else{
+                alert('Ficha descubierta');
+            }
+        }else{
+            alert('Posición incorrecta');
+        }
+
+    }, 
 
     generarTabla: function (coordenadas) {
         let num = 0;
@@ -149,16 +197,8 @@ var Partida = {
         document.getElementById("mostrarTabla").innerHTML = tablero;
     },
 
-    iniciarTablero: function(coordenadas){
-        for(let i=0;i < coordenadas; i++){
-            this.tablero[i] = [];
-            for(let j = 0; j < coordenadas;j++ ){
-                this.tablero[i][j] = "g";
-                
-            }
-        }
-        console.log(this.tablero)
-    },
+    
+           
 }
 
 /*

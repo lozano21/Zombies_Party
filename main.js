@@ -13,7 +13,6 @@ window.onload = function(){
         console.log(coordenadas);
 
     }
-
     Partida.generarTabla(coordenadas);
     Partida.iniciarTablero(coordenadas);
 }
