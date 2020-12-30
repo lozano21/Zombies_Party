@@ -13,8 +13,9 @@ window.onload = function(){
         console.log(coordenadas);
 
     }
-    Partida.generarTabla(coordenadas);
-    Partida.iniciarTablero(coordenadas);
+    Partida.iniciarJuego(coordenadas);
+    //Partida.generarTabla(coordenadas);
+    //Partida.iniciarTablero(coordenadas);
 }
 
 

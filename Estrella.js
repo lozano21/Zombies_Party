@@ -1,4 +1,4 @@
 //Objecte fill Estrella
-let Estrella = function(nom){
-    this.posicio;
+var Estrella = function(){
+    Elements.apply(this, arguments);
 }
