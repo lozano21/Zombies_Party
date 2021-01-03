@@ -2,9 +2,8 @@
 
 //generar tabla
 window.onload = function(){
-    
-    var coordenadas = 0;
-    coordenadas = parseInt(prompt("Medida del tablero "));
+
+    var coordenadas = parseInt(prompt("Medida del tablero "));
 
     while(coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20){//bucle while para el tamaño de la tabla
 
@@ -13,10 +12,15 @@ window.onload = function(){
         console.log(coordenadas);
 
     }
-    Partida.iniciarJuego(coordenadas);
+    partida.iniciarJuego(coordenadas);
     //Partida.generarTabla(coordenadas);
     //Partida.iniciarTablero(coordenadas);
 }
 
+let insert = document.getElementById("insBoto");
 
+insert.onclick = function() {
 
+    alert(document.getElementById("xBoto").value);
+
+}
