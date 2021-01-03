@@ -5,6 +5,4 @@ var meitatZombies = function(){
     /*Prototype = hijo*/
     meitatZombies.prototype = Object.create(Recompensa.prototype);
     meitatZombies.prototype.constructor = Recompensa;
-    meitatZombies.prototype.Draw = function(dibujar){
-     dibujar[this.x][this.y] = 'mZ'
-    }
+  

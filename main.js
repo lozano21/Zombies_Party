@@ -1,6 +1,4 @@
 //main
-
-//generar tabla
 window.onload = function(){
     
     var coordenadas = 0;
