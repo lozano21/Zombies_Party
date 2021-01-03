@@ -99,7 +99,7 @@ var Partida = {
             do{
                 var x = Math.floor(Math.random() * this.medidaTablero) ;
                 var y = Math.floor(Math.random() * this.medidaTablero) ; 
-            }while(this.tablero[x][y] != "g" || this.tablero[x][y + 1] != "g")
+            }while(this.tablero[x][y] != "g" || this.tablero[x][y + 1] != "g");
             cMZ.x = x;
             cMZ.y = y;
             cMZ.orientacion = orientacion;

@@ -15,10 +15,12 @@ window.onload = function(){
     //Partida.iniciarTablero(coordenadas);
 }
 
-let insert = document.getElementById("insBoto");
+
+
+/*/let insert = document.getElementById("insBoto");
 
 insert.onclick = function() {
 
     alert(document.getElementById("xBoto").value);
-
-}
+ 
+}*/
