@@ -86,13 +86,8 @@ var partida = {
 
     //RECOMPENSAS  = Crea las recompensas llamando a las funciones
     crearRecompensas: function() {
-<<<<<<< HEAD
-        //25% de uso
-        while (this.recompensasCreadas < (this.medidaTablero * 25) / 100) {
-=======
     //25% de uso
         while(this.recompensasCreadas < ((this.medidaTablero * this.medidaTablero) * 25) / 100){
->>>>>>> dc5784f1c9f45baaa78027fd1db50e18cc46f6f9
 
             this.crearDoblePuntos();
             this.crearMitadZombie();
