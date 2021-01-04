@@ -45,7 +45,7 @@ var partida = {
         this.generarTabla(coordenadas);
 
     },
-//Genera la tabla en los divs del html
+    //Genera la tabla en los divs del html
     generarTabla: function(coordenadas){
 
             let tablero = "<div id='master' class='center'>";
@@ -85,7 +85,7 @@ var partida = {
 
     //RECOMPENSAS  = Crea las recompensas llamando a las funciones
     crearRecompensas: function() {
-//25% de uso
+    //25% de uso
         while(this.recompensasCreadas < (this.medidaTablero * 25) / 100){
 
             this.crearDoblePuntos();
@@ -94,7 +94,7 @@ var partida = {
 
         }
     },
-//Rellena la tabla con DoblesPuntos(DP)
+    //Rellena la tabla con DoblesPuntos(DP)
     crearDoblePuntos: function() {
 
         try{
@@ -118,7 +118,7 @@ var partida = {
         } catch(e){}
     },
 
-//Ubica MT de forma horizontal o vertical dependiendo del math random
+    //Ubica MT de forma horizontal o vertical dependiendo del math random
     crearMitadZombie: function() {
 
         try {
@@ -166,7 +166,7 @@ var partida = {
         } catch(e){}
     },
 
-//Ubica VD de forma horizontal o vertical dependiendo del math random
+    //Ubica VD de forma horizontal o vertical dependiendo del math random
     crearVidaExtra: function() {
 
         try {
@@ -477,6 +477,13 @@ var partida = {
     //new function descubrir casilla pillar X y Y y comprovar q no esté descubierta y si no, q la muestre
 
 
+}
+
+RevelarTablero = function(){ 
+
+    /*Primero mostrar todo el tablero (como la funcion de mostrar X pero en vez de mostrar X mostramos this.tablero[i][j]), después de 3 segundos llamar otra vez a la funcion generarTabla
+    luego llamar a la estrella para dejarla descubierta*/
+    
 }
 
 //document.getElementById("insBoto").addEventListener("click", partida.seleccionarCoordenada);
