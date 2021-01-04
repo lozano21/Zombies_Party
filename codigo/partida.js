@@ -318,7 +318,7 @@ var partida = {
     esSeleccionado: function(seleccion){
         var sel = true;
         for(i = 0; i < seleccion.length; i++){
-            if(seleccion[i].sel != null){
+            if(!seleccion[i].sel){
                 sel = false;
             }
         }
@@ -375,6 +375,28 @@ var partida = {
 
     },
 
+    eliminarMitadZombies: function(){
+        let zombiesDescubiertos = 0;
+        for(i = 0; i != this.zombies.length; i++){
+            if(this.zombies[i].seleccionado == false){
+                zombiesDescubiertos ++;
+            }
+        }
+
+        let mitadZombiesDescubiertos = (zombiesDescubiertos / 2);
+        a = 0;
+            while(mitadZombiesDescubiertos >= 0){
+                if(!this.zombies[a].seleccionado){
+                    this.zombies[a].seleccionado = true;
+                    mitadZombiesDescubiertos --;
+
+                    this.getTablero()[this.zombies[a].x][this.zombies[a].y] = 'g';
+                }
+
+                a++;
+            }
+    },
+
     comprovarLetra: function(letra, posX, posY) {
 
         this.iniciarTablero(); //Porque llamais a iniciartablero? by Dani
@@ -385,10 +407,10 @@ var partida = {
 
                 for (i = 0; i < this.doblePuntos.length; i++) {
 
-                    if (this.doblePuntos[i].y == posY && this.doblePuntos[i].x == posX) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
+                    if (posX == this.doblePuntos[i].posX && posY == this.doblePuntos[i].posY) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
 
-                        this.doblesPuntosEncontrados++;
-                        this.doblePuntos[i].seleccinado = true;
+                        this.doblesPuntosEncontrados ++;
+                        this.doblePuntos[i].seleccionado = true;
 
                     }
                 }
@@ -403,7 +425,7 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 1){
 
-                        if((posX - 1) == this.mitadZombie[i].x || posX == this.mitadZombie[i].x){
+                        if((x - 1) == this.mitadZombie[i].x || posX == this.mitadZombie[i].x){
 
                             this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
@@ -411,11 +433,11 @@ var partida = {
 
                                 this.mitadZombiesEncontrados++;
                                 this.mitadZombie[i].seleccionado = true;
+                                this.eliminarMitadZombies();
                                 
                             }
                         }
                     }
-
                     if(this.mitadZombie[i].orientacion == 0){
 
                         if((posY - 1) == this.mitadZombie[i].y || posY == this.mitadZombie[i].y){
@@ -426,6 +448,7 @@ var partida = {
 
                                 this.mitadZombiesEncontrados++;
                                 this.mitadZombie[i].seleccionado = true;
+                                this.eliminarMitadZombies();
 
                             }
                         }
