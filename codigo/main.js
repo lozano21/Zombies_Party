@@ -54,7 +54,7 @@ function coord() {
                 }
 
                 partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
-                partida.comprovarLetra(ficha, posX, posY);
+                //partida.comprovarLetra(ficha, posX, posY);
                 document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
                 //TODO funcionalidad de las letras
             } else {
