@@ -352,7 +352,7 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 1){
 
-                        if((x - 1) == this.mitadZombie[i].posX || x == this.mitadZombie[i].posX){
+                        if((x - 1) == this.mitadZombie[i].x || x == this.mitadZombie[i].x){
 
                             this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
@@ -367,7 +367,7 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 0){
 
-                        if((y - 1) == this.mitadZombie[i].posX || y == this.mitadZombie[i].posX){
+                        if((y - 1) == this.mitadZombie[i].y || y == this.mitadZombie[i].y){
 
                             this.mitadZombie[i].medidaTablero--;
 
@@ -388,7 +388,7 @@ var partida = {
 
                 for(i = 0; i < this.vidaExtra.length;i ++){
 
-                    if(this.vidaExtra[i].orientacion == 1){
+                    if(this.vidaExtra[i].orientacion == 0){
 
                         if((x - 1) == this.vidaExtra[i].posX || (x + 1) == this.vidaExtra[i].posX || x == this.vidaExtra[i].posX){
 
@@ -404,7 +404,7 @@ var partida = {
                         }
                     }
 
-                    if(this.vidaExtra[i].orientacion == 0){
+                    if(this.vidaExtra[i].orientacion == 1){
 
                         if((y - 1) == this.vidaExtra[i].posX || (y + 1) == this.vidaExtra[i].posX || y == this.vidaExtra[i].posX){
 
@@ -451,7 +451,7 @@ var partida = {
             break;
             case"E":
 
-                this.estrellas++;
+                this.estrellasEncontradas++;
                 this.puntos += 200;
 
                 for(i = 0; i < this.estrellas.length; i++){
