@@ -18,7 +18,7 @@ var partida = {
     doblesPuntosEncontrados: 0,
     vidas: 3,
 
-    //Rellenamos las casillas de campo (consola)
+    //Rellenamos las casillas de campo (consola), e iniciamos tablero del tamaño escogido con G's
     iniciarTablero: function(coordenadas) {
 
         for (let i = 0; i < coordenadas; i++){
@@ -34,6 +34,7 @@ var partida = {
         console.log(this.tablero);
     },
 
+    //Core, inicia todas las funciones por orden
     iniciarJuego: function(coordenadas){
 
         this.medidaTablero = coordenadas;
@@ -44,7 +45,7 @@ var partida = {
         this.generarTabla(coordenadas);
 
     },
-
+//Genera la tabla en los divs del html
     generarTabla: function(coordenadas){
 
             let tablero = "<div id='master' class='center'>";
@@ -82,9 +83,9 @@ var partida = {
        },
     
 
-    //RECOMPENSAS
+    //RECOMPENSAS  = Crea las recompensas llamando a las funciones
     crearRecompensas: function() {
-
+//25% de uso
         while(this.recompensasCreadas < (this.medidaTablero * 25) / 100){
 
             this.crearDoblePuntos();
@@ -93,7 +94,7 @@ var partida = {
 
         }
     },
-
+//Rellena la tabla con DoblesPuntos(DP)
     crearDoblePuntos: function() {
 
         try{
@@ -139,7 +140,7 @@ var partida = {
                 cmz.orientacion = orientacion;
 
                 this.tablero[x][y] = "mz";
-                this.tablero[x][y+1] = "mz";
+                this.tablero[x+1][y] = "mz";
                 this.recompensasCreadas += 2;
 
             } else {
