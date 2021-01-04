@@ -49,14 +49,26 @@ var partida = {
 
             let tablero = "<div id='master' class='center'>";
 
-            for (let i = 0; i < coordenadas; i++){
+            for (let i = 1; i < coordenadas+1; i++){
 
                 tablero += "<div class='row'>";    
 
-                for (let j = 0; j < coordenadas; j++){    
+                for (let j = 1; j < coordenadas+1; j++){
 
-                    tablero += "<div id='" + i + "," + j + "' class='cell' onclick='seleccionarCoordenadas()'> x </div>";
-                    //console.log(i + "," + j);
+                    if (coordenadas >= 5 && coordenadas <= 8) {
+
+                        tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='seleccionarCoordenadas()'>";
+                        tablero += "<p class='L_cont_cell'> X </p></div>";
+                        //console.log(i + "," + j);
+
+                    } else if (coordenadas >= 9 && coordenadas <= 20) {
+
+                        tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='seleccionarCoordenadas()'>";
+                        tablero += "<p class='S_cont_cell'> X </p></div>";
+                        //console.log(i + "," + j);
+
+                    }
+
 
                 }
 
@@ -266,7 +278,7 @@ var partida = {
         return this.tablero;
 
     },
-
+    /*
     seleccionarCoordenada: function(){
 
         posX = document.getElementById("posX").value;
@@ -278,7 +290,9 @@ var partida = {
 
             if(ficha.toString() === ficha.toLowerCase()){
 
-                document.getElementById(posX + "," + posY).innerHTML = ficha.toUpperCase();
+
+
+                document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
                 partida.tablero[posX][posY] =  ficha.toUpperCase();
                 //document.getElementById(posX.toString() + posY.toString()).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
 
@@ -294,8 +308,10 @@ var partida = {
 
         }
 
-    },
 
+
+    },
+    */
     comprovarLetra: function(letra,posX,posY){
 
         this.iniciarTablero();
@@ -461,7 +477,7 @@ var partida = {
 
 }
 
-document.getElementById("insBoto").addEventListener("click", partida.seleccionarCoordenada);
+//document.getElementById("insBoto").addEventListener("click", partida.seleccionarCoordenada);
 /*
 
     rellenarTabla: function(coordenadas){
