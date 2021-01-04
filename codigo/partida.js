@@ -316,7 +316,7 @@ var partida = {
     */
     comprovarLetra: function(letra,posX,posY){
 
-        this.iniciarTablero();
+        this.iniciarTablero(); //Porque llamais a iniciartablero? by Dani
 
         switch(letra){
 
@@ -324,7 +324,7 @@ var partida = {
 
                 for(i = 0; i < this.doblePuntos.length;i++){
 
-                    if(this.doblePuntos[i].posY == posY && this.doblePuntos[i].posX == posX){
+                    if(this.doblePuntos[i].posY == posY && this.doblePuntos[i].posX == posX){ //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
 
                         this.doblesPuntosEncontrados ++;
                         this.doblePuntos[i].seleccinado = true;
@@ -332,7 +332,7 @@ var partida = {
                     }
                 }
 
-                this.puntos *= 2;
+                this.puntos *= 2; //Dobla la puntuación
 
             break;
             case"MZ":
@@ -343,7 +343,7 @@ var partida = {
 
                         if((x - 1) == this.meitatZombie[i].posX || x == this.meitatZombie[i].posX){
 
-                            this.meitatZombie[i].medidaTablero--;
+                            this.meitatZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
                             if(this.meitatZombie[i].medidaTablero == 0){
 
@@ -354,7 +354,7 @@ var partida = {
                         }
                     }
 
-                    if(this.meitatZombie[i].orientacion == 1){
+                    if(this.meitatZombie[i].orientacion == 0){
 
                         if((y - 1) == this.meitatZombie[i].posX || y == this.meitatZombie[i].posX){
 
