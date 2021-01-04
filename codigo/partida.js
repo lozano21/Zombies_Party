@@ -4,7 +4,6 @@ var partida = {
     tablero: [],
     recompensasCreadas: 0,
     medidaTablero: 5,
-    //totalcasillas: 25,
     mitadZombie: [],
     doblePuntos: [],
     vidaExtra: [],
