@@ -315,7 +315,6 @@ var partida = {
 
     },
     */
-    //Función para revelar el tablero si escoges la casilla en la que estaba la estrella
     esSeleccionado: function(seleccion){
         var sel = true;
         for(i = 0; i < seleccion.length; i++){
@@ -325,7 +324,10 @@ var partida = {
         }
         return sel;
     },
+
+    //Función para revelar el tablero si escoges la casilla en la que estaba la estrella
     RevelarTablero: function() {
+
         /*Primero mostrar todo el tablero (como la funcion de mostrar X pero en vez de mostrar X mostramos this.tablero[i][j]), después de 3 segundos llamar otra vez a la funcion generarTabla
         luego llamar a la estrella para dejarla descubierta*/
 
@@ -393,10 +395,10 @@ var partida = {
                 this.puntos *= 2; //Dobla la puntuación
                 this.Estadisticas();
 
-                break;
+                return '#fff';
             case "MZ":
 
-                for(i = 0; i < this.mitadZombie.length;i++){
+                for(i = 0; i < this.mitadZombie.length;i ++){
 
                     if(this.mitadZombie[i].orientacion == 1){
 
@@ -431,10 +433,10 @@ var partida = {
 
                 this.Estadisticas();
 
-                break;
+                return '#e62e1b';
             case "VE":
 
-                for(i = 0; i < this.vidaExtra.length;i++){
+                for (i = 0; i < this.vidaExtra.length; i++){
 
                     if (this.vidaExtra[i].orientacion == 1) {
 
@@ -469,7 +471,7 @@ var partida = {
                 }
                 this.Estadisticas();
 
-                break;
+                return '#7FED7E';
             case "Z":
 
                 this.zombiesEncontrados++;
@@ -496,7 +498,7 @@ var partida = {
                     }, 3000);
                 }
 
-                break;
+                return '#93c572';
             case "E":
 
                 this.estrellas++;
@@ -521,16 +523,17 @@ var partida = {
                     }, 2000);
                 }
 
-                break;
+                return '#57a639';
             case "G":
 
                 this.puntos += 50;
                 this.Estadisticas();
 
-                break;
+                return '#F09D61';
 
         }
-    }
+        return '#fff';
+    },
 
 
         Estadisticas: function(){
