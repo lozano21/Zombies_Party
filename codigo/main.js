@@ -53,7 +53,7 @@ function coord() {
                 }
 
                 partida.tablero[posX-1][posY-1] = ficha.toUpperCase();
-                //document.getElementById(posX.toString() + posY.toString()).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
+                document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
 
             } else {
 

@@ -13,7 +13,7 @@ var partida = {
     estrellasEncontradas: 0,
     vidasExtrasEncontradas: 0,
     zombiesEncontrados: 0,
-    meitatZombiesEncontrados: 0,
+    mitadZombiesEncontrados: 0,
     doblesPuntosEncontrados: 0,
     vidas: 3,
 
@@ -42,6 +42,7 @@ var partida = {
         this.crearZombies();
         this.crearEstrellas();
         this.generarTabla(coordenadas);
+        this.Estadisticas();
 
     },
     //Genera la tabla en los divs del html
@@ -85,7 +86,7 @@ var partida = {
     //RECOMPENSAS  = Crea las recompensas llamando a las funciones
     crearRecompensas: function() {
     //25% de uso
-        while(this.recompensasCreadas < (this.medidaTablero * 25) / 100){
+        while(this.recompensasCreadas < ((this.medidaTablero * this.medidaTablero) * 25) / 100){
 
             this.crearDoblePuntos();
             this.crearMitadZombie();
@@ -221,7 +222,7 @@ var partida = {
 
         var cz = new zombie();
 
-        while(this.zombiesCreados < (this.medidaTablero * 25) / 100){
+        while(this.zombiesCreados < ((this.medidaTablero * this.medidaTablero)* 25) / 100){
 
             do {
 
@@ -313,6 +314,16 @@ var partida = {
 
     },
     */
+    esSeleccionado: function(seleccion){
+        var sel = true;
+        for(i = 0; i < seleccion.length; i++){
+            if(seleccion[i].sel != null){
+                sel = false;
+            }
+        }
+        return sel;
+    },
+
     comprovarLetra: function(letra,posX,posY){
 
         this.iniciarTablero(); //Porque llamais a iniciartablero? by Dani
@@ -332,49 +343,50 @@ var partida = {
                 }
 
                 this.puntos *= 2; //Dobla la puntuación
+                this.Estadisticas();
 
             break;
             case"MZ":
 
-                for(i = 0; i < this.meitatZombie.length;i ++){
+                for(i = 0; i < this.mitadZombie.length;i ++){
 
-                    if(this.meitatZombie[i].orientacion == 1){
+                    if(this.mitadZombie[i].orientacion == 1){
 
-                        if((x - 1) == this.meitatZombie[i].posX || x == this.meitatZombie[i].posX){
+                        if((x - 1) == this.mitadZombie[i].posX || x == this.mitadZombie[i].posX){
 
-                            this.meitatZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
+                            this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
-                            if(this.meitatZombie[i].medidaTablero == 0){
+                            if(this.mitadZombie[i].medidaTablero == 0){
 
-                                this.meitatZombiesEncontrados++;
-                                this.meitatZombie[i].seleccinado = true;
+                                this.mitadZombiesEncontrados++;
+                                this.mitadZombie[i].seleccinado = true;
                                 
                             }
                         }
                     }
 
-                    if(this.meitatZombie[i].orientacion == 0){
+                    if(this.mitadZombie[i].orientacion == 0){
 
-                        if((y - 1) == this.meitatZombie[i].posX || y == this.meitatZombie[i].posX){
+                        if((y - 1) == this.mitadZombie[i].posX || y == this.mitadZombie[i].posX){
 
-                            this.meitatZombie[i].medidaTablero--;
+                            this.mitadZombie[i].medidaTablero--;
 
-                            if(this.meitatZombie[i].medidaTablero == 0){
+                            if(this.mitadZombie[i].medidaTablero == 0){
 
-                                this.meitatZombiesEncontrados++;
-                                this.meitatZombie[i].seleccinado = true;
+                                this.mitadZombiesEncontrados++;
+                                this.mitadZombie[i].seleccinado = true;
 
                             }
                         }
                     }
                 }
 
-                this.Puntuaciones();
+                this.Estadisticas();
 
             break;
             case"VE":
 
-                for(i = 0; i < this.vidaExtr.lengtha;i ++){
+                for(i = 0; i < this.vidaExtra.length;i ++){
 
                     if(this.vidaExtra[i].orientacion == 1){
 
@@ -407,7 +419,7 @@ var partida = {
                         }
                     }
                 }
-                this.Puntuaciones();
+                this.Estadisticas();
 
             break;
             case"Z":
@@ -425,7 +437,7 @@ var partida = {
                 }
 
                 this.vidas --;
-                this.Puntuaciones();
+                this.Estadisticas();
 
                 if(this.vidas == 0){
 
@@ -451,7 +463,7 @@ var partida = {
                     }
                 }
 
-                this.Puntuaciones();
+                this.Estadisticas();
 
                 if(this.esSeleccionado(this.estrellas)){
 
@@ -466,12 +478,55 @@ var partida = {
             case"G":
 
                 this.puntos += 50;
-                this.Puntuaciones();
+                this.Estadisticas();
 
             break;
 
             }
         },
+
+
+        Estadisticas: function(){
+            var estadisticas
+            var ver;
+            ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
+            ver += "Estrellas: " + this.estrellas.length;
+            ver += "</br>";
+            ver += "Estrellas encontradas: "+this.estrellasEncontradas;
+            ver += "</br>";
+            ver += "Zombies: "+this.zombies.length;
+            ver += "</br>";
+            ver += "Zombies encontrados: "+this.zombiesEncontrados;
+            ver += "</br>";
+            ver += "Puntos dobles: "+this.doblePuntos.length;
+            ver += "</br>";
+            ver += "Puntos dobles encontrados: "+this.doblesPuntosEncontrados;
+            ver += "</br>";
+            ver += "Vidas extra: "+this.vidaExtra.length;
+            ver += "</br>";
+            ver += "Vidas extra encontradas: "+this.vidasExtrasEncontradas;
+            ver += "</br>";
+            ver += "Mitad zombie: "+this.mitadZombie.length;
+            ver += "</br>";
+            ver += "Mitad zombie encontrados: "+this.mitadZombiesEncontrados;
+            ver += "</br>";
+            ver += "Vidas: "+this.vidas;
+            ver += "</br>";
+            ver += "</br>";
+            ver += "</br>";
+            ver += "</br>";
+            ver += "ESTADISTICAS:";
+            ver += "</br>";
+            ver += "Partidas ganadas: ";
+            ver += "</br>";
+            ver += "Partidas perdidas: ";
+            ver += "</br>";
+            ver += "partidas abandonadas: ";
+            
+
+            estadisticas = document.getElementById("stats").innerHTML = ver;
+
+        }
 
     //new function descubrir casilla pillar X y Y y comprovar q no esté descubierta y si no, q la muestre
 
