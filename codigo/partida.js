@@ -476,14 +476,13 @@ var partida = {
 
     //new function descubrir casilla pillar X y Y y comprovar q no esté descubierta y si no, q la muestre
 
+    RevelarTablero = function(){ 
 
-}
+        /*Primero mostrar todo el tablero (como la funcion de mostrar X pero en vez de mostrar X mostramos this.tablero[i][j]), después de 3 segundos llamar otra vez a la funcion generarTabla
+        luego llamar a la estrella para dejarla descubierta*/
+        
+    }
 
-RevelarTablero = function(){ 
-
-    /*Primero mostrar todo el tablero (como la funcion de mostrar X pero en vez de mostrar X mostramos this.tablero[i][j]), después de 3 segundos llamar otra vez a la funcion generarTabla
-    luego llamar a la estrella para dejarla descubierta*/
-    
 }
 
 //document.getElementById("insBoto").addEventListener("click", partida.seleccionarCoordenada);
