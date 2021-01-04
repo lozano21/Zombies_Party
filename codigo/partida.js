@@ -118,7 +118,7 @@ var partida = {
         } catch(e){}
     },
 
-
+//Ubica MT de forma horizontal o vertical dependiendo del math random
     crearMitadZombie: function() {
 
         try {
@@ -166,6 +166,7 @@ var partida = {
         } catch(e){}
     },
 
+//Ubica VD de forma horizontal o vertical dependiendo del math random
     crearVidaExtra: function() {
 
         try {
@@ -206,8 +207,8 @@ var partida = {
                 cve.orientacion = orientacion;
 
                 this.tablero[x][y] = "ve";
-                this.tablero[x][y + 1] = "ve"
-                this.tablero[x][y - 1] = "ve"
+                this.tablero[x][y+1] = "ve"
+                this.tablero[x][y-1] = "ve"
                 this.recompensasCreadas += 3;
             }
 
@@ -216,7 +217,7 @@ var partida = {
         } catch(e){}
     },
 
-    //ZOMBIES
+    //ZOMBIES = Crea Z en el tablero ocupando un 25%
     crearZombies: function() {
 
         var cz = new zombie();
@@ -240,14 +241,14 @@ var partida = {
         }
     },
 
-    //ESTRELLAS
+    //ESTRELLAS = Crea 
     crearEstrellas: function() {
 
         try{
 
             var ce = new estrella();
 
-            while(this.estrellasCreadas < (this.medidaTablero * 25) / 100){
+            while(this.estrellasCreadas < (this.medidaTablero)){
 
                 do {
 
