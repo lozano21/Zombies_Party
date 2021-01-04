@@ -402,7 +402,7 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 1){
 
-                        if((x - 1) == this.mitadZombie[i].posX || x == this.mitadZombie[i].posX){
+                        if((x - 1) == this.mitadZombie[i].x || x == this.mitadZombie[i].x){
 
                             this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
@@ -417,7 +417,7 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 0){
 
-                        if((y - 1) == this.mitadZombie[i].posX || y == this.mitadZombie[i].posX){
+                        if((y - 1) == this.mitadZombie[i].y || y == this.mitadZombie[i].y){
 
                             this.mitadZombie[i].medidaTablero--;
 
@@ -501,7 +501,7 @@ var partida = {
                 return '#93c572';
             case "E":
 
-                this.estrellas++;
+                this.estrellasEncontradas++;
                 this.puntos += 200;
 
                 for (i = 0; i < this.estrellas.length; i++) {
