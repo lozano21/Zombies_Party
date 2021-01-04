@@ -374,6 +374,7 @@ var partida = {
 
 
     },
+
     comprovarLetra: function(letra, posX, posY) {
 
         this.iniciarTablero(); //Porque llamais a iniciartablero? by Dani
@@ -384,7 +385,7 @@ var partida = {
 
                 for (i = 0; i < this.doblePuntos.length; i++) {
 
-                    if (this.doblePuntos[i].posY == posY && this.doblePuntos[i].posX == posX) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
+                    if (this.doblePuntos[i].y == posY && this.doblePuntos[i].x == posX) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
 
                         this.doblesPuntosEncontrados++;
                         this.doblePuntos[i].seleccinado = true;
@@ -392,7 +393,7 @@ var partida = {
                     }
                 }
 
-                this.puntos *= 2; //Dobla la puntuación
+                this.puntos = this.puntos * 2; //Dobla la puntuación
                 this.Estadisticas();
 
                 return '#fff';
@@ -402,14 +403,14 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 1){
 
-                        if((x - 1) == this.mitadZombie[i].x || x == this.mitadZombie[i].x){
+                        if((posX - 1) == this.mitadZombie[i].x || posX == this.mitadZombie[i].x){
 
                             this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
                             if(this.mitadZombie[i].medidaTablero == 0){
 
                                 this.mitadZombiesEncontrados++;
-                                this.mitadZombie[i].seleccinado = true;
+                                this.mitadZombie[i].seleccionado = true;
                                 
                             }
                         }
@@ -417,14 +418,14 @@ var partida = {
 
                     if(this.mitadZombie[i].orientacion == 0){
 
-                        if((y - 1) == this.mitadZombie[i].y || y == this.mitadZombie[i].y){
+                        if((posY - 1) == this.mitadZombie[i].y || posY == this.mitadZombie[i].y){
 
                             this.mitadZombie[i].medidaTablero--;
 
                             if(this.mitadZombie[i].medidaTablero == 0){
 
                                 this.mitadZombiesEncontrados++;
-                                this.mitadZombie[i].seleccinado = true;
+                                this.mitadZombie[i].seleccionado = true;
 
                             }
                         }
@@ -440,14 +441,14 @@ var partida = {
 
                     if (this.vidaExtra[i].orientacion == 1) {
 
-                        if ((x - 1) == this.vidaExtra[i].posX || (x + 1) == this.vidaExtra[i].posX || x == this.vidaExtra[i].posX) {
+                        if ((posX - 1) == this.vidaExtra[i].posX || (posX + 1) == this.vidaExtra[i].posX || posX == this.vidaExtra[i].posX) {
 
                             this.vidaExtra[i].medidaTablero--;
 
                             if (this.vidaExtra[i].medidaTablero == 0) {
 
                                 this.vidasExtrasEncontradas++;
-                                this.vidaExtra[i].seleccinado = true;
+                                this.vidaExtra[i].seleccionado = true;
                                 this.vidas++;
 
                             }
@@ -456,14 +457,14 @@ var partida = {
 
                     if (this.vidaExtra[i].orientacion == 0) {
 
-                        if ((y - 1) == this.vidaExtra[i].posX || (y + 1) == this.vidaExtra[i].posX || y == this.vidaExtra[i].posX) {
+                        if ((posY - 1) == this.vidaExtra[i].posY || (posY + 1) == this.vidaExtra[i].posY || posY == this.vidaExtra[i].posY) {
 
                             this.vidaExtra[i].medidaTablero--;
 
                             if (this.vidaExtra[i].medidaTablero == 0) {
 
                                 this.vidasExtrasEncontradas++;
-                                this.vidaExtra[i].seleccinado = true;
+                                this.vidaExtra[i].seleccionado = true;
                                 this.vidas++;
                             }
                         }
@@ -506,7 +507,7 @@ var partida = {
 
                 for (i = 0; i < this.estrellas.length; i++) {
                     if (this.estrellas[i].posX == posX && this.estrellas[i].posY == posY) {
-                        this.estrellas[i].seleccinado = true;
+                        this.estrellas[i].seleccionado = true;
                     }
                 }
 
@@ -514,14 +515,14 @@ var partida = {
 
                 this.Estadisticas();
 
-                if (this.esSeleccionado(this.estrellas)) {
+                /* if (this.esSeleccionado(this.estrellas)) {
 
                     setTimeout(function() {
 
                         alert("HAS GANADO!!!");
 
                     }, 2000);
-                }
+                } */
 
                 return '#57a639';
             case "G":
@@ -540,6 +541,9 @@ var partida = {
             var estadisticas
             var ver;
             ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
+            ver += "Puntos totales: "+this.puntos;
+            ver += "</br>";
+            ver += "</br>";
             ver += "Estrellas: " + this.estrellas.length;
             ver += "</br>";
             ver += "Estrellas encontradas: "+this.estrellasEncontradas;
