@@ -45,7 +45,7 @@ function coord() {
 
                 if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
 
-                    //document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
+                    document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
                     imagen();
 
                 } else {
@@ -90,6 +90,9 @@ function imagen() {
         case "e":
             document.getElementById(id).innerHTML = "<image src='imagenes/star.png'>";
         break;
+        case "z":
+            document.getElementById(id).innerHTML = "<image src='imagenes/skull.png'>";
+        break;
 
     }
 
@@ -102,3 +105,5 @@ function clear() {
     document.getElementById("posY").value = "";
 
 }
+
+

@@ -59,13 +59,13 @@ var partida = {
 
                 if (coordenadas >= 5 && coordenadas <= 8) {
 
-                    tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='seleccionarCoordenadas()'>";
+                    tablero += "<div id='" + i + "," + j + "' class='large_cell'>";
                     tablero += "<p class='L_cont_cell'> X </p></div>";
                     //console.log(i + "," + j);
 
                 } else if (coordenadas >= 9 && coordenadas <= 20) {
 
-                    tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='seleccionarCoordenadas()'>";
+                    tablero += "<div id='" + i + "," + j + "' class='small_cell'>";
                     tablero += "<p class='S_cont_cell'> X </p></div>";
                     //console.log(i + "," + j);
 
