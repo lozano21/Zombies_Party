@@ -17,6 +17,7 @@ var partida = {
     mitadZombiesEncontrados: 0,
     doblesPuntosEncontrados: 0,
     vidas: 3,
+    casillasSeleccionadas: 0,
 
     //Rellenamos las casillas de campo (consola), e iniciamos tablero del tamaño escogido con G's
     iniciarTablero: function(coordenadas) {
@@ -289,40 +290,6 @@ var partida = {
         return this.tablero;
 
     },
-    /*
-    seleccionarCoordenada: function(){
-
-        posX = document.getElementById("posX").value;
-        posY = document.getElementById("posY").value;
-
-        if(posX >= 0 && posX < partida.medidaTablero && posY >= 0 && posY < partida.medidaTablero){
-
-            var ficha = partida.tablero[posX][posY];
-
-            if(ficha.toString() === ficha.toLowerCase()){
-
-
-
-                document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
-                partida.tablero[posX][posY] =  ficha.toUpperCase();
-                //document.getElementById(posX.toString() + posY.toString()).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
-
-            }else{
-
-                alert('Ficha descubierta');
-
-            }
-
-        }else{
-
-            alert('Posición incorrecta');
-
-        }
-
-
-
-    },
-    */
 
     esSeleccionado: function(seleccion) {
 
@@ -439,18 +406,20 @@ var partida = {
 
     comprovarLetra: function(letra, posX, posY) {
 
-        this.iniciarTablero(); //Porque llamais a iniciartablero? by Dani
-        //letra = partida.tablero[posX][posY].toUpper();
+        this.iniciarTablero();
+        partida.casillasSeleccionadas++;
         switch (letra.toUpperCase()) {
 
             case "DP":
 
-                for (i = 0; i < this.doblePuntos.length; i++) {
+                posX--;
+                posY--;
+                for (i = 0; i < partida.doblePuntos.length; i++) {
 
-                    if (posX == this.doblePuntos[i].posX && posY == this.doblePuntos[i].posY) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
+                    if (posX == partida.doblePuntos[i].x && posY == partida.doblePuntos[i].y) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
 
-                        this.doblesPuntosEncontrados++;
-                        this.doblePuntos[i].seleccionado = true;
+                        partida.doblesPuntosEncontrados++;
+                        partida.doblePuntos[i].seleccionado = true;
 
                     }
                 }
@@ -461,23 +430,21 @@ var partida = {
                 return '#fff';
             case "MZ":
 
-                for (i = 0; i < this.mitadZombie.length; i++) {
 
-                    posX--;
-                    posY--;
-                    for (i = 0; i < partida.mitadZombie.length; i++) {
-                        var vE = partida.mitadZombie[i];
-                        if (posX == vE.x && posY == vE.y || //centro
-                            posX - 1 == vE.x && posY == vE.y || //izquierda
-                            posX + 1 == vE.x && posY == vE.y || //derecha
-                            posX == vE.x && posY - 1 == vE.y || //abajo
-                            posX == vE.x && posY + 1 == vE.y) { //arriba
-                            vE.casillas++;
-                            vE.seleccionado = true;
-                            if (vE.casillas == 2) {
-                                partida.mitadZombiesEncontrados++;
-                                partida.eliminarMitadZombies();
-                            }
+                posX--;
+                posY--;
+                for (i = 0; i < partida.mitadZombie.length; i++) {
+                    var vE = partida.mitadZombie[i];
+                    if (posX == vE.x && posY == vE.y || //centro
+                        posX - 1 == vE.x && posY == vE.y || //izquierda
+                        posX + 1 == vE.x && posY == vE.y || //derecha
+                        posX == vE.x && posY - 1 == vE.y || //abajo
+                        posX == vE.x && posY + 1 == vE.y) { //arriba
+                        vE.casillas++;
+                        vE.seleccionado = true;
+                        if (vE.casillas == 2) {
+                            partida.mitadZombiesEncontrados++;
+                            partida.eliminarMitadZombies();
                         }
                     }
                 }
@@ -544,8 +511,10 @@ var partida = {
 
                     }, 2000);        
                 }
-
-                this.RevelarTablero();
+                if (partida.casillasSeleccionadas<2){
+                    console.log(partida.casillasSeleccionadas);
+                    this.RevelarTablero();
+                }
 
                 this.Estadisticas();
 
