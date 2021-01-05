@@ -173,7 +173,6 @@ var partida = {
         try {
 
             var cve = new vidaExtra(3);
-            vidaExtra(3);
             let orientacion = Math.floor(Math.random() * 2);
 
             if (orientacion == 0) {
@@ -183,7 +182,7 @@ var partida = {
                     var x = Math.floor(Math.random() * this.medidaTablero);
                     var y = Math.floor(Math.random() * this.medidaTablero);
 
-                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x >= this.medidaTablero - 1);
+                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x >= this.medidaTablero - 2);
 
                 cve.x = x;
                 cve.y = y;
@@ -201,7 +200,7 @@ var partida = {
                     var x = Math.floor(Math.random() * this.medidaTablero);
                     var y = Math.floor(Math.random() * this.medidaTablero);
 
-                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x >= this.medidaTablero - 1);
+                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x >= this.medidaTablero - 2);
 
                 cve.x = x;
                 cve.y = y;
@@ -492,38 +491,17 @@ var partida = {
                 return '#e62e1b';
             case "VE":
 
-                for (i = 0; i < this.vidaExtra.length; i++){
+                for (i = 0; i < partida.vidaExtra.length; i++){
 
-                    if (this.vidaExtra[i].orientacion == 1) {
-
-                        if ((posX - 1) == this.vidaExtra[i].posX || (posX + 1) == this.vidaExtra[i].posX || posX == this.vidaExtra[i].posX) {
-
-                            this.vidaExtra[i].medidaTablero--;
-
-                            if (this.vidaExtra[i].medidaTablero == 0) {
-
-                                this.vidasExtrasEncontradas++;
-                                this.vidaExtra[i].seleccionado = true;
-                                this.vidas++;
+                        if (posX == partida.vidaExtra[i].posX && posY == this.vidaExtra[i].posY) {
+                            partida.vidasExtrasEncontradas++;
+                            debug.log(partida.vidaExtra);
+                            partida.vidaExtra[i].seleccionado = true;
+                            if (partida.vidasExtrasEncontradas == 3) {
+                                partida.vidas++;
 
                             }
                         }
-                    }
-
-                    if (this.vidaExtra[i].orientacion == 0) {
-
-                        if ((posY - 1) == this.vidaExtra[i].posY || (posY + 1) == this.vidaExtra[i].posY || posY == this.vidaExtra[i].posY) {
-
-                            this.vidaExtra[i].medidaTablero--;
-
-                            if (this.vidaExtra[i].medidaTablero == 0) {
-
-                                this.vidasExtrasEncontradas++;
-                                this.vidaExtra[i].seleccionado = true;
-                                this.vidas++;
-                            }
-                        }
-                    }
                 }
                 this.Estadisticas();
 
@@ -531,16 +509,7 @@ var partida = {
             case "Z":
 
                 this.zombiesEncontrados++;
-
-                if (this.puntos > 100) {
-
-                    this.puntos -= 100;
-
-                } else {
-
-                    this.puntos = 0;
-
-                }
+                this.puntos=this.puntos-100<0?0:this.puntos-100;
 
                 this.vidas --;
                 this.Estadisticas();
@@ -596,7 +565,6 @@ var partida = {
 
         Estadisticas: function(){
 
-            var estadisticas
             var ver;
 
             ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
@@ -636,7 +604,7 @@ var partida = {
             ver += "</br>";
             ver += "partidas abandonadas: ";
 
-            estadisticas = document.getElementById("stats").innerHTML = ver;
+            document.getElementById("stats").innerHTML = ver;
 
         }
 

@@ -62,31 +62,6 @@ function coord() {
     }
 }
 
-function imagen() {
-
-    let posX = document.getElementById("posX").value;
-    let posY = document.getElementById("posY").value;
-
-    let id = posX + "," + posY;
-    let ficha = partida.tablero[posX-1][posY-1];
-
-    switch (ficha){
-
-        case "g":
-            document.getElementById(id).innerHTML = "<image src='imagenes/grass.png'>";
-        break;
-        case "e":
-            document.getElementById(id).innerHTML = "<image src='imagenes/star.png'>";
-        break;
-        case "z":
-            document.getElementById(id).innerHTML = "<image src='imagenes/skull.png'>";
-        break;
-
-    }
-
-
-}
-
 function clear() {
 
     document.getElementById("posX").value = "";
