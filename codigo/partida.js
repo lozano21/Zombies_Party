@@ -476,7 +476,7 @@ var partida = {
             case "Z":
 
                 this.zombiesEncontrados++;
-                this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100;
+                this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100; // ternaria para substituir el if
 
                 this.vidas--;
                 this.Estadisticas();
