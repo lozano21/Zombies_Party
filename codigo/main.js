@@ -25,8 +25,8 @@ ins.onclick = function() {
 
 function coord() {
 
-    let posX = document.getElementById("posX").value;
-    let posY = document.getElementById("posY").value;
+        let posX = document.getElementById("posX").value;
+        let posY = document.getElementById("posY").value;
     max = partida.medidaTablero + 1;
 
     if (posX == "" || posY == "") {
@@ -45,11 +45,13 @@ function coord() {
 
                 if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
 
-                    document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
+                    //document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
+                    imagen();
 
                 } else {
 
                     document.getElementById(posX + "," + posY).innerHTML = "<p class='S_cont_cell'>" + ficha.toUpperCase() + "</p>";
+                    imagen();
 
                 }
 
@@ -70,6 +72,28 @@ function coord() {
         }
 
     }
+}
+
+function imagen() {
+
+    let posX = document.getElementById("posX").value;
+    let posY = document.getElementById("posY").value;
+
+    let id = posX + "," + posY;
+    let ficha = partida.tablero[posX-1][posY-1];
+
+    switch (ficha){
+
+        case "g":
+            document.getElementById(id).innerHTML = "<image src='imagenes/grass.png'>";
+        break;
+        case "e":
+            document.getElementById(id).innerHTML = "<image src='imagenes/star.png'>";
+        break;
+
+    }
+
+
 }
 
 function clear() {

@@ -46,7 +46,7 @@ var partida = {
         this.Estadisticas();
 
     },
-    //Genera la tabla en los divs del html
+    //Creación de tabla mediante divs
     generarTabla: function(coordenadas) {
 
         let tablero = "<div id='master' class='center'>";
@@ -119,7 +119,7 @@ var partida = {
         } catch (e) {}
     },
 
-    //Ubica MT de forma horizontal o vertical dependiendo del math random
+    //Ubica los Mitad Zombies de forma horizontal o vertical dependiendo del math random
     crearMitadZombie: function() {
 
         try {
@@ -167,7 +167,7 @@ var partida = {
         } catch (e) {}
     },
 
-    //Ubica VD de forma horizontal o vertical dependiendo del math random
+    //Ubica las Vidas Extra de forma horizontal o vertical dependiendo del math random
     crearVidaExtra: function() {
 
         try {
@@ -315,13 +315,20 @@ var partida = {
 
     },
     */
+
     esSeleccionado: function(seleccion){
+
         var sel = true;
+
         for(i = 0; i < seleccion.length; i++){
+
             if(!seleccion[i].sel){
+
                 sel = false;
+
             }
         }
+
         return sel;
     },
 
@@ -333,30 +340,45 @@ var partida = {
 
         //Itera todo el tablero y lo muestra
         for (let i = 1; i <= this.tablero.length; i++) {
+
             for (let j = 1; j <= this.tablero[0].length; j++) {
+
                 let ficha = this.tablero[i - 1][j - 1];
 
                 if (this.medidaTablero >= 5 && this.medidaTablero <= 8) {
+
                     document.getElementById(i + "," + j).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
+
                 } else {
+
                     document.getElementById(i + "," + j).innerHTML = "<p class='S_cont_cell'>" + ficha.toUpperCase() + "</p>";
+
                 }
             }
         }
 
         setTimeout(function() {
+
             //Resetea todo el tablero a X
             for (let i = 1; i <= partida.tablero.length; i++) {
+
                 for (let j = 1; j <= partida.tablero[0].length; j++) {
+
                     if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
+
                         document.getElementById(i + "," + j).innerHTML = "<p class='L_cont_cell'>X</p>";
+
                     } else {
+
                         document.getElementById(i + "," + j).innerHTML = "<p class='S_cont_cell'>X</p>";
+
                     }
                 }
             }
+
             //Muestra los inputs guardados
             for (let it = 0; it < partida.inputs.length; it++) {
+
                 const inp = partida.inputs[it];
                 var i = inp[0] + 1;
                 var j = inp[1] + 1;
@@ -365,9 +387,13 @@ var partida = {
                 console.log(inp + " " + i + " " + j);
 
                 if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
+
                     document.getElementById(i + "," + j).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
+
                 } else {
+
                     document.getElementById(i + "," + j).innerHTML = "<p class='S_cont_cell'>" + ficha.toUpperCase() + "</p>";
+
                 }
             }
         }, 3000); //Wait 3 sec
@@ -376,21 +402,30 @@ var partida = {
     },
 
     eliminarMitadZombies: function(){
+
         let zombiesDescubiertos = 0;
+
         for(i = 0; i != this.zombies.length; i++){
+
             if(this.zombies[i].seleccionado == false){
+
                 zombiesDescubiertos ++;
+
             }
         }
 
         let mitadZombiesDescubiertos = (zombiesDescubiertos / 2);
         a = 0;
+
             while(mitadZombiesDescubiertos >= 0){
+
                 if(!this.zombies[a].seleccionado){
+
                     this.zombies[a].seleccionado = true;
                     mitadZombiesDescubiertos --;
 
                     this.getTablero()[this.zombies[a].x][this.zombies[a].y] = 'g';
+
                 }
 
                 a++;
@@ -529,8 +564,11 @@ var partida = {
                 this.puntos += 200;
 
                 for (i = 0; i < this.estrellas.length; i++) {
+
                     if (this.estrellas[i].posX == posX && this.estrellas[i].posY == posY) {
+
                         this.estrellas[i].seleccionado = true;
+
                     }
                 }
 
@@ -561,8 +599,10 @@ var partida = {
 
 
         Estadisticas: function(){
+
             var estadisticas
             var ver;
+
             ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
             ver += "Puntos totales: "+this.puntos;
             ver += "</br>";
@@ -599,7 +639,6 @@ var partida = {
             ver += "Partidas perdidas: ";
             ver += "</br>";
             ver += "partidas abandonadas: ";
-            
 
             estadisticas = document.getElementById("stats").innerHTML = ver;
 
