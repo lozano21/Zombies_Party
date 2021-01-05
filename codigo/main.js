@@ -45,16 +45,15 @@ function coord() {
 
                 if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
 
-                    document.getElementById(posX + "," + posY).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
+                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />';//futuro alt
 
                 } else {
 
-                    document.getElementById(posX + "," + posY).innerHTML = "<p class='S_cont_cell'>" + ficha.toUpperCase() + "</p>";
+                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />';//futuro alt
 
                 }
 
                 partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
-                //partida.comprovarLetra(ficha, posX, posY);
                 document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
                 //TODO funcionalidad de las letras
             } else {

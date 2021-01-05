@@ -135,8 +135,6 @@ input {
     background-color: pink;
     position: absolute;
     left: 15%;
-
-
     width: 70%;
     height: 100%;
 
@@ -168,6 +166,9 @@ input {
 
     cursor: pointer;
 
+    /*display:grid;
+    justify-content: center;
+    align-content: center;*/
 }
 
 .small_cell {
@@ -185,6 +186,9 @@ input {
 
     cursor: pointer;
 
+    display:grid;
+    justify-content: center;
+    align-content: center;
 }
 
 .L_cont_cell {
@@ -193,8 +197,6 @@ input {
     height: 100%;
 
     margin: 0;
-
-    margin-top: 40px;
 
 }
 

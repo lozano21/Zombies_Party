@@ -60,13 +60,13 @@ var partida = {
                 if (coordenadas >= 5 && coordenadas <= 8) {
 
                     tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='seleccionarCoordenadas()'>";
-                    tablero += "<p class='L_cont_cell'> X </p></div>";
+                    tablero += '<img src="imagenes/equis.png" class="L_cont_cell" /></div>';
                     //console.log(i + "," + j);
 
                 } else if (coordenadas >= 9 && coordenadas <= 20) {
 
                     tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='seleccionarCoordenadas()'>";
-                    tablero += "<p class='S_cont_cell'> X </p></div>";
+                    tablero += '<img src="imagenes/equis.png" class="L_cont_cell" /></div>';
                     //console.log(i + "," + j);
 
                 }
@@ -325,6 +325,30 @@ var partida = {
         return sel;
     },
 
+    GetImageByLetter: function(ficha){
+        switch (ficha.toUpperCase()) {
+    
+            case "DP":
+    
+                return 'imagenes/2x.png';
+            case "MZ":
+    
+                return 'imagenes/meitatzombie.jpg';
+            case "VE":
+    
+                return 'imagenes/life.png';
+            case "Z":
+    
+                return 'imagenes/zombie.gif';
+            case "E":
+    
+                return 'imagenes/star.png';
+            case "G":
+    
+                return 'imagenes/grass.png';
+        }
+    },
+
     //Función para revelar el tablero si escoges la casilla en la que estaba la estrella
     RevelarTablero: function() {
 
@@ -335,12 +359,7 @@ var partida = {
         for (let i = 1; i <= this.tablero.length; i++) {
             for (let j = 1; j <= this.tablero[0].length; j++) {
                 let ficha = this.tablero[i - 1][j - 1];
-
-                if (this.medidaTablero >= 5 && this.medidaTablero <= 8) {
-                    document.getElementById(i + "," + j).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
-                } else {
-                    document.getElementById(i + "," + j).innerHTML = "<p class='S_cont_cell'>" + ficha.toUpperCase() + "</p>";
-                }
+                document.getElementById(i + "," + j).innerHTML = '<img src="' + this.GetImageByLetter(ficha) + '"class="L_cont_cell" />';
             }
         }
 
@@ -348,11 +367,7 @@ var partida = {
             //Resetea todo el tablero a X
             for (let i = 1; i <= partida.tablero.length; i++) {
                 for (let j = 1; j <= partida.tablero[0].length; j++) {
-                    if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
-                        document.getElementById(i + "," + j).innerHTML = "<p class='L_cont_cell'>X</p>";
-                    } else {
-                        document.getElementById(i + "," + j).innerHTML = "<p class='S_cont_cell'>X</p>";
-                    }
+                    document.getElementById(i + "," + j).innerHTML = '<img src="imagenes/equis.png" class="L_cont_cell" />';
                 }
             }
             //Muestra los inputs guardados
@@ -363,12 +378,7 @@ var partida = {
 
                 let ficha = partida.tablero[i - 1][j - 1];
                 console.log(inp + " " + i + " " + j);
-
-                if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8) {
-                    document.getElementById(i + "," + j).innerHTML = "<p class='L_cont_cell'>" + ficha.toUpperCase() + "</p>";
-                } else {
-                    document.getElementById(i + "," + j).innerHTML = "<p class='S_cont_cell'>" + ficha.toUpperCase() + "</p>";
-                }
+                document.getElementById(i + "," + j).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '"class="L_cont_cell" />';
             }
         }, 3000); //Wait 3 sec
 
@@ -558,7 +568,6 @@ var partida = {
         }
         return '#fff';
     },
-
 
         Estadisticas: function(){
             var estadisticas
