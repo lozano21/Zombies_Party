@@ -86,8 +86,8 @@ var partida = {
 
     //RECOMPENSAS  = Crea las recompensas llamando a las funciones
     crearRecompensas: function() {
-    //25% de uso
-        while(this.recompensasCreadas < ((this.medidaTablero * this.medidaTablero) * 25) / 100){
+        //25% de uso
+        while (this.recompensasCreadas < ((this.medidaTablero * this.medidaTablero) * 25) / 100) {
 
             this.crearDoblePuntos();
             this.crearMitadZombie();
@@ -101,11 +101,12 @@ var partida = {
         try {
 
             var cdp = new puntosDobles(1);
-
+            var x = 0,
+                y = 0;
             do {
 
-                var x = Math.floor(Math.random() * this.medidaTablero);
-                var y = Math.floor(Math.random() * this.medidaTablero);
+                x = Math.floor(Math.random() * this.medidaTablero);
+                y = Math.floor(Math.random() * this.medidaTablero);
 
             } while (this.tablero[x][y] != "g");
 
@@ -172,40 +173,39 @@ var partida = {
 
         try {
 
-            var cve = new vidaExtra(3);
             let orientacion = Math.floor(Math.random() * 2);
+            var cve = new vidaExtra(3, orientacion);
+            cve.casillas = 0;
 
             if (orientacion == 0) {
-
+                var x = 0,
+                    y = 0;
                 do {
+                    x = Math.floor(Math.random() * this.medidaTablero);
+                    y = Math.floor(Math.random() * this.medidaTablero);
 
-                    var x = Math.floor(Math.random() * this.medidaTablero);
-                    var y = Math.floor(Math.random() * this.medidaTablero);
-
-                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x >= this.medidaTablero - 2);
+                } while (this.tablero[x][y] != "g" && this.tablero[x - 1][y] != "g" && this.tablero[x + 1][y] != "g" && x >= this.medidaTablero - 2 && x > 1);
 
                 cve.x = x;
                 cve.y = y;
                 cve.orientacion = orientacion;
-
                 this.tablero[x][y] = "ve";
                 this.tablero[x + 1][y] = "ve";
                 this.tablero[x - 1][y] = "ve";
                 this.recompensasCreadas += 3;
 
             } else {
-
+                var x = 0,
+                    y = 0;
                 do {
+                    x = Math.floor(Math.random() * this.medidaTablero);
+                    y = Math.floor(Math.random() * this.medidaTablero);
 
-                    var x = Math.floor(Math.random() * this.medidaTablero);
-                    var y = Math.floor(Math.random() * this.medidaTablero);
-
-                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x >= this.medidaTablero - 2);
+                } while (this.tablero[x][y] != "g" && this.tablero[x][y - 1] != "g" && this.tablero[x][y + 1] != "g" && y >= this.medidaTablero - 2 && y > 1);
 
                 cve.x = x;
                 cve.y = y;
                 cve.orientacion = orientacion;
-
                 this.tablero[x][y] = "ve";
                 this.tablero[x][y + 1] = "ve"
                 this.tablero[x][y - 1] = "ve"
@@ -222,7 +222,7 @@ var partida = {
 
         var cz = new zombie();
 
-        while(this.zombiesCreados < ((this.medidaTablero * this.medidaTablero)* 25) / 100){
+        while (this.zombiesCreados < ((this.medidaTablero * this.medidaTablero) * 25) / 100) {
 
             do {
 
@@ -315,13 +315,13 @@ var partida = {
     },
     */
 
-    esSeleccionado: function(seleccion){
+    esSeleccionado: function(seleccion) {
 
         var sel = true;
 
-        for(i = 0; i < seleccion.length; i++){
+        for (i = 0; i < seleccion.length; i++) {
 
-            if(!seleccion[i].sel){
+            if (!seleccion[i].sel) {
 
                 sel = false;
 
@@ -331,26 +331,26 @@ var partida = {
         return sel;
     },
 
-    GetImageByLetter: function(ficha){
+    GetImageByLetter: function(ficha) {
         switch (ficha.toUpperCase()) {
-    
+
             case "DP":
-    
+
                 return 'imagenes/2x.png';
             case "MZ":
-    
+
                 return 'imagenes/meitatzombie.jpg';
             case "VE":
-    
+
                 return 'imagenes/life.png';
             case "Z":
-    
+
                 return 'imagenes/zombie.gif';
             case "E":
-    
+
                 return 'imagenes/star.png';
             case "G":
-    
+
                 return 'imagenes/grass.png';
         }
     },
@@ -397,15 +397,15 @@ var partida = {
 
     },
 
-    eliminarMitadZombies: function(){
+    eliminarMitadZombies: function() {
 
         let zombiesDescubiertos = 0;
 
-        for(i = 0; i != this.zombies.length; i++){
+        for (i = 0; i != this.zombies.length; i++) {
 
-            if(this.zombies[i].seleccionado == false){
+            if (this.zombies[i].seleccionado == false) {
 
-                zombiesDescubiertos ++;
+                zombiesDescubiertos++;
 
             }
         }
@@ -413,19 +413,19 @@ var partida = {
         let mitadZombiesDescubiertos = (zombiesDescubiertos / 2);
         a = 0;
 
-            while(mitadZombiesDescubiertos >= 0){
+        while (mitadZombiesDescubiertos >= 0) {
 
-                if(!this.zombies[a].seleccionado){
+            if (!this.zombies[a].seleccionado) {
 
-                    this.zombies[a].seleccionado = true;
-                    mitadZombiesDescubiertos --;
+                this.zombies[a].seleccionado = true;
+                mitadZombiesDescubiertos--;
 
-                    this.getTablero()[this.zombies[a].x][this.zombies[a].y] = 'g';
+                this.getTablero()[this.zombies[a].x][this.zombies[a].y] = 'g';
 
-                }
-
-                a++;
             }
+
+            a++;
+        }
     },
 
     comprovarLetra: function(letra, posX, posY) {
@@ -440,7 +440,7 @@ var partida = {
 
                     if (posX == this.doblePuntos[i].posX && posY == this.doblePuntos[i].posY) { //Si encuentra en esa posicion que tiene las mismas coordenadas que yo suma las estadisticas
 
-                        this.doblesPuntosEncontrados ++;
+                        this.doblesPuntosEncontrados++;
                         this.doblePuntos[i].seleccionado = true;
 
                     }
@@ -452,30 +452,30 @@ var partida = {
                 return '#fff';
             case "MZ":
 
-                for(i = 0; i < this.mitadZombie.length;i ++){
+                for (i = 0; i < this.mitadZombie.length; i++) {
 
-                    if(this.mitadZombie[i].orientacion == 1){
+                    if (this.mitadZombie[i].orientacion == 1) {
 
-                        if((x - 1) == this.mitadZombie[i].x || posX == this.mitadZombie[i].x){
+                        if ((x - 1) == this.mitadZombie[i].x || posX == this.mitadZombie[i].x) {
 
                             this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
 
-                            if(this.mitadZombie[i].medidaTablero == 0){
+                            if (this.mitadZombie[i].medidaTablero == 0) {
 
                                 this.mitadZombiesEncontrados++;
                                 this.mitadZombie[i].seleccionado = true;
                                 this.eliminarMitadZombies();
-                                
+
                             }
                         }
                     }
-                    if(this.mitadZombie[i].orientacion == 0){
+                    if (this.mitadZombie[i].orientacion == 0) {
 
-                        if((posY - 1) == this.mitadZombie[i].y || posY == this.mitadZombie[i].y){
+                        if ((posY - 1) == this.mitadZombie[i].y || posY == this.mitadZombie[i].y) {
 
                             this.mitadZombie[i].medidaTablero--;
 
-                            if(this.mitadZombie[i].medidaTablero == 0){
+                            if (this.mitadZombie[i].medidaTablero == 0) {
 
                                 this.mitadZombiesEncontrados++;
                                 this.mitadZombie[i].seleccionado = true;
@@ -490,18 +490,22 @@ var partida = {
 
                 return '#e62e1b';
             case "VE":
-
-                for (i = 0; i < partida.vidaExtra.length; i++){
-
-                        if (posX == partida.vidaExtra[i].posX && posY == this.vidaExtra[i].posY) {
+                posX--;
+                posY--;
+                for (i = 0; i < partida.vidaExtra.length; i++) {
+                    var vE = partida.vidaExtra[i];
+                    if (posX == vE.x && posY == vE.y ||
+                        posX - 1 == vE.x && posY == vE.y ||
+                        posX + 1 == vE.x && posY == vE.y ||
+                        posX == vE.x && posY - 1 == vE.y ||
+                        posX == vE.x && posY + 1 == vE.y) {
+                        vE.casillas++;
+                        vE.seleccionado = true;
+                        if (vE.casillas == 3) {
+                            partida.vidas++;
                             partida.vidasExtrasEncontradas++;
-                            debug.log(partida.vidaExtra);
-                            partida.vidaExtra[i].seleccionado = true;
-                            if (partida.vidasExtrasEncontradas == 3) {
-                                partida.vidas++;
-
-                            }
                         }
+                    }
                 }
                 this.Estadisticas();
 
@@ -509,9 +513,9 @@ var partida = {
             case "Z":
 
                 this.zombiesEncontrados++;
-                this.puntos=this.puntos-100<0?0:this.puntos-100;
+                this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100;
 
-                this.vidas --;
+                this.vidas--;
                 this.Estadisticas();
 
                 if (this.vidas == 0) {
@@ -563,50 +567,50 @@ var partida = {
         return '#fff';
     },
 
-        Estadisticas: function(){
+    Estadisticas: function() {
 
-            var ver;
+        var ver;
 
-            ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
-            ver += "Puntos totales: "+this.puntos;
-            ver += "</br>";
-            ver += "</br>";
-            ver += "Estrellas: " + this.estrellas.length;
-            ver += "</br>";
-            ver += "Estrellas encontradas: "+this.estrellasEncontradas;
-            ver += "</br>";
-            ver += "Zombies: "+this.zombies.length;
-            ver += "</br>";
-            ver += "Zombies encontrados: "+this.zombiesEncontrados;
-            ver += "</br>";
-            ver += "Puntos dobles: "+this.doblePuntos.length;
-            ver += "</br>";
-            ver += "Puntos dobles encontrados: "+this.doblesPuntosEncontrados;
-            ver += "</br>";
-            ver += "Vidas extra: "+this.vidaExtra.length;
-            ver += "</br>";
-            ver += "Vidas extra encontradas: "+this.vidasExtrasEncontradas;
-            ver += "</br>";
-            ver += "Mitad zombie: "+this.mitadZombie.length;
-            ver += "</br>";
-            ver += "Mitad zombie encontrados: "+this.mitadZombiesEncontrados;
-            ver += "</br>";
-            ver += "Vidas: "+this.vidas;
-            ver += "</br>";
-            ver += "</br>";
-            ver += "</br>";
-            ver += "</br>";
-            ver += "ESTADISTICAS:";
-            ver += "</br>";
-            ver += "Partidas ganadas: ";
-            ver += "</br>";
-            ver += "Partidas perdidas: ";
-            ver += "</br>";
-            ver += "partidas abandonadas: ";
+        ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
+        ver += "Puntos totales: " + this.puntos;
+        ver += "</br>";
+        ver += "</br>";
+        ver += "Estrellas: " + this.estrellas.length;
+        ver += "</br>";
+        ver += "Estrellas encontradas: " + this.estrellasEncontradas;
+        ver += "</br>";
+        ver += "Zombies: " + this.zombies.length;
+        ver += "</br>";
+        ver += "Zombies encontrados: " + this.zombiesEncontrados;
+        ver += "</br>";
+        ver += "Puntos dobles: " + this.doblePuntos.length;
+        ver += "</br>";
+        ver += "Puntos dobles encontrados: " + this.doblesPuntosEncontrados;
+        ver += "</br>";
+        ver += "Vidas extra: " + this.vidaExtra.length;
+        ver += "</br>";
+        ver += "Vidas extra encontradas: " + this.vidasExtrasEncontradas;
+        ver += "</br>";
+        ver += "Mitad zombie: " + this.mitadZombie.length;
+        ver += "</br>";
+        ver += "Mitad zombie encontrados: " + this.mitadZombiesEncontrados;
+        ver += "</br>";
+        ver += "Vidas: " + this.vidas;
+        ver += "</br>";
+        ver += "</br>";
+        ver += "</br>";
+        ver += "</br>";
+        ver += "ESTADISTICAS:";
+        ver += "</br>";
+        ver += "Partidas ganadas: ";
+        ver += "</br>";
+        ver += "Partidas perdidas: ";
+        ver += "</br>";
+        ver += "partidas abandonadas: ";
 
-            document.getElementById("stats").innerHTML = ver;
+        document.getElementById("stats").innerHTML = ver;
 
-        }
+    }
 
     //new function descubrir casilla pillar X y Y y comprovar q no esté descubierta y si no, q la muestre
 

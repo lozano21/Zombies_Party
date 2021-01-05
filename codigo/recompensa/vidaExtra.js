@@ -1,9 +1,8 @@
 //Objecto hijo de recompensa
 
 var vidaExtra = function() {
-
     recompensa.apply(this, arguments);
-
+    var casillas = 0;
 }
 
 //Prototype = hijo
