@@ -25,8 +25,8 @@ ins.onclick = function() {
 
 function coord() {
 
-        let posX = document.getElementById("posX").value;
-        let posY = document.getElementById("posY").value;
+    let posX = document.getElementById("posX").value;
+    let posY = document.getElementById("posY").value;
     max = partida.medidaTablero + 1;
 
     if (posX == "" || posY == "") {
@@ -42,10 +42,10 @@ function coord() {
             console.log("ficha: " + ficha);
 
             if (ficha.toString() === ficha.toLocaleLowerCase()) {
-                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />';//futuro alt
+                document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />'; //futuro alt
 
                 partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
-                document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(),posX,posY);
+                document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(), posX, posY);
                 //TODO funcionalidad de las letras
             } else {
 
@@ -70,3 +70,12 @@ function clear() {
 }
 
 
+function inputChangeX() {
+    var x = document.getElementById("posX");
+    x.value = x.value > partida.medidaTablero ? partida.medidaTablero : x.value;
+}
+
+function inputChangeY() {
+    var x = document.getElementById("posY");
+    x.value = x.value > partida.medidaTablero ? partida.medidaTablero : x.value;
+}

@@ -3,7 +3,7 @@
 var mitadZombies = function() {
 
     recompensa.apply(this, arguments);
-
+    var casillas = 0;
 }
 
 //Prototype = hijo

@@ -45,6 +45,8 @@ var partida = {
         this.generarTabla(coordenadas);
         this.Estadisticas();
 
+        document.getElementById("posX").maxLength = this.medidaTablero >= 10 ? 2 : 1;
+        document.getElementById("posY").maxLength = this.medidaTablero >= 10 ? 2 : 1;
     },
     //Creación de tabla mediante divs
     generarTabla: function(coordenadas) {
@@ -100,7 +102,7 @@ var partida = {
 
         try {
 
-            var cdp = new puntosDobles(1);
+            var cdp = new puntosDobles(1, 0);
             var x = 0,
                 y = 0;
             do {
@@ -125,17 +127,18 @@ var partida = {
 
         try {
 
-            var cmz = new mitadZombies(2);
             let orientacion = Math.floor(Math.random() * 2);
-
+            var cmz = new mitadZombies(2, orientacion);
+            cmz.casillas = 0;
             if (orientacion == 0) {
-
+                var x = 0,
+                    y = 0;
                 do {
 
-                    var x = Math.floor(Math.random() * this.medidaTablero);
-                    var y = Math.floor(Math.random() * this.medidaTablero);
+                    x = Math.floor(Math.random() * this.medidaTablero);
+                    y = Math.floor(Math.random() * this.medidaTablero);
 
-                } while (this.tablero[x][y] != "g" || this.tablero[x + 1][y] != "g");
+                } while (this.tablero[x][y] != "g" || this.tablero[x + 1][y] != "g" || x <= this.medidaTablero - 2);
 
                 cmz.x = x;
                 cmz.y = y;
@@ -146,13 +149,14 @@ var partida = {
                 this.recompensasCreadas += 2;
 
             } else {
-
+                var x = 0,
+                    y = 0;
                 do {
+                    console.log("bucle2");
+                    x = Math.floor(Math.random() * this.medidaTablero);
+                    y = Math.floor(Math.random() * this.medidaTablero);
 
-                    var x = Math.floor(Math.random() * this.medidaTablero);
-                    var y = Math.floor(Math.random() * this.medidaTablero);
-
-                } while (this.tablero[x][y] != "g" || this.tablero[x][y + 1] != "g");
+                } while (this.tablero[x][y] != "g" || this.tablero[x][y + 1] != "g" || y > this.medidaTablero - 2);
 
                 cmz.x = x;
                 cmz.y = y;
@@ -168,7 +172,7 @@ var partida = {
         } catch (e) {}
     },
 
-    //Ubica las Vidas Extra de forma horizontal o vertical dependiendo del math random
+    //Ubíca las Vidas Extra de forma horizontal o vertical dependiendo del math random
     crearVidaExtra: function() {
 
         try {
@@ -181,10 +185,11 @@ var partida = {
                 var x = 0,
                     y = 0;
                 do {
+                    console.log("bucle");
                     x = Math.floor(Math.random() * this.medidaTablero);
                     y = Math.floor(Math.random() * this.medidaTablero);
 
-                } while (this.tablero[x][y] != "g" && this.tablero[x - 1][y] != "g" && this.tablero[x + 1][y] != "g" && x >= this.medidaTablero - 2 && x > 1);
+                } while (this.tablero[x][y] != "g" || this.tablero[x - 1][y] != "g" || this.tablero[x + 1][y] != "g" || x > this.medidaTablero - 2 && x <= 0);
 
                 cve.x = x;
                 cve.y = y;
@@ -198,10 +203,11 @@ var partida = {
                 var x = 0,
                     y = 0;
                 do {
+                    console.log("bucle3");
                     x = Math.floor(Math.random() * this.medidaTablero);
                     y = Math.floor(Math.random() * this.medidaTablero);
 
-                } while (this.tablero[x][y] != "g" && this.tablero[x][y - 1] != "g" && this.tablero[x][y + 1] != "g" && y >= this.medidaTablero - 2 && y > 1);
+                } while (this.tablero[x][y] != "g" || this.tablero[x][y - 1] != "g" || this.tablero[x][y + 1] != "g" || y > this.medidaTablero - 2 && y <= 0);
 
                 cve.x = x;
                 cve.y = y;
@@ -454,33 +460,20 @@ var partida = {
 
                 for (i = 0; i < this.mitadZombie.length; i++) {
 
-                    if (this.mitadZombie[i].orientacion == 1) {
-
-                        if ((x - 1) == this.mitadZombie[i].x || posX == this.mitadZombie[i].x) {
-
-                            this.mitadZombie[i].medidaTablero--; //falta hacer que se reduzcan los zombies
-
-                            if (this.mitadZombie[i].medidaTablero == 0) {
-
-                                this.mitadZombiesEncontrados++;
-                                this.mitadZombie[i].seleccionado = true;
-                                this.eliminarMitadZombies();
-
-                            }
-                        }
-                    }
-                    if (this.mitadZombie[i].orientacion == 0) {
-
-                        if ((posY - 1) == this.mitadZombie[i].y || posY == this.mitadZombie[i].y) {
-
-                            this.mitadZombie[i].medidaTablero--;
-
-                            if (this.mitadZombie[i].medidaTablero == 0) {
-
-                                this.mitadZombiesEncontrados++;
-                                this.mitadZombie[i].seleccionado = true;
-                                this.eliminarMitadZombies();
-
+                    posX--;
+                    posY--;
+                    for (i = 0; i < partida.mitadZombie.length; i++) {
+                        var vE = partida.mitadZombie[i];
+                        if (posX == vE.x && posY == vE.y || //centro
+                            posX - 1 == vE.x && posY == vE.y || //izquierda
+                            posX + 1 == vE.x && posY == vE.y || //derecha
+                            posX == vE.x && posY - 1 == vE.y || //abajo
+                            posX == vE.x && posY + 1 == vE.y) { //arriba
+                            vE.casillas++;
+                            vE.seleccionado = true;
+                            if (vE.casillas == 2) {
+                                partida.mitadZombiesEncontrados++;
+                                partida.eliminarMitadZombies();
                             }
                         }
                     }
@@ -494,11 +487,11 @@ var partida = {
                 posY--;
                 for (i = 0; i < partida.vidaExtra.length; i++) {
                     var vE = partida.vidaExtra[i];
-                    if (posX == vE.x && posY == vE.y ||
-                        posX - 1 == vE.x && posY == vE.y ||
-                        posX + 1 == vE.x && posY == vE.y ||
-                        posX == vE.x && posY - 1 == vE.y ||
-                        posX == vE.x && posY + 1 == vE.y) {
+                    if (posX == vE.x && posY == vE.y || //centro
+                        posX - 1 == vE.x && posY == vE.y || //izquierda
+                        posX + 1 == vE.x && posY == vE.y || //derecha
+                        posX == vE.x && posY - 1 == vE.y || //abajo
+                        posX == vE.x && posY + 1 == vE.y) { //arriba
                         vE.casillas++;
                         vE.seleccionado = true;
                         if (vE.casillas == 3) {
