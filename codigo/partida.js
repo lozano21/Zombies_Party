@@ -47,43 +47,48 @@ var partida = {
 
         document.getElementById("posX").maxLength = this.medidaTablero >= 10 ? 2 : 1;
         document.getElementById("posY").maxLength = this.medidaTablero >= 10 ? 2 : 1;
+
+
     },
-    //Creación de tabla mediante divs
+
+    /**
+     * Creación de tabla mediante divs
+     * @param coordenadas - numero de filas y columnas
+     */
     generarTabla: function(coordenadas) {
 
         let tablero = "<div id='master' class='center'>";
 
+        /* Pilla el tamaño de la página escogiendo entre todos los delimitadores de tamaño de
+           la pagina el mas grande*/
+        var body = document.body, html = document.documentElement;
+        var height = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, html.clientHeight, body.clientHeight);
+        var width = Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth, html.clientWidth, body.clientWidth);
+
+        /* Escoge el mas pequeño de ambas medidas para que se 
+           redimensione de forma acorde y quepa en la página*/
+        height = Math.min(height, width);
+        var size = (height / partida.medidaTablero)*0.85;
+        size = size * (100/Math.max(html.clientWidth, html.clientHeight)); // De Px a vw/vh (viewportWidth, viewportHeight)
+
+        // Bucle que crea las casillas de la tabla
         for (let i = 1; i < coordenadas + 1; i++) {
-
             tablero += "<div class='row'>";
-
             for (let j = 1; j < coordenadas + 1; j++) {
-
-                if (coordenadas >= 5 && coordenadas <= 8) {
-
-                    tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='seleccionarCoordenadas()'>";
-                    tablero += '<img src="imagenes/equis.png" class="L_cont_cell" /></div>';
-                    //console.log(i + "," + j);
-
-                } else if (coordenadas >= 9 && coordenadas <= 20) {
-
-                    tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='seleccionarCoordenadas()'>";
-                    tablero += '<img src="imagenes/equis.png" class="L_cont_cell" /></div>';
-                    //console.log(i + "," + j);
-
-                }
-
-
+                /* La ternaria de height y width son una continuación del size de arriba, sirve para
+                 saber cuál debe usar dependiendo de si la pagina es mas grande vertical o horizontalmente*/
+                tablero += "<div id='" + i + "," + j + "' class='cell' style='height:"+size+(height>width?"vh":"vw")+"; width:"+size+(height>width?"vh":"vw")+";' "+
+                "onclick='seleccionarCoordenadas()'>";
+                tablero += '<img src="imagenes/equis.png" class="L_cont_cell" /></div>';
             }
-
             tablero += "</div>";
-
         }
-
         tablero += "</div>";
+        
+        // Mete dentro del elemento createTable todo el string tablero que pasa a ser HTML de verdad
         document.getElementById('createTable').innerHTML = tablero;
-
     },
+
 
 
     //RECOMPENSAS  = Crea las recompensas llamando a las funciones
@@ -97,6 +102,7 @@ var partida = {
 
         }
     },
+
     //Rellena la tabla con DoblesPuntos(DP)
     crearDoblePuntos: function() {
 
@@ -152,7 +158,6 @@ var partida = {
                 var x = 0,
                     y = 0;
                 do {
-                    console.log("bucle2");
                     x = Math.floor(Math.random() * this.medidaTablero);
                     y = Math.floor(Math.random() * this.medidaTablero);
 
@@ -185,7 +190,6 @@ var partida = {
                 var x = 0,
                     y = 0;
                 do {
-                    console.log("bucle");
                     x = Math.floor(Math.random() * this.medidaTablero);
                     y = Math.floor(Math.random() * this.medidaTablero);
 
@@ -203,7 +207,6 @@ var partida = {
                 var x = 0,
                     y = 0;
                 do {
-                    console.log("bucle3");
                     x = Math.floor(Math.random() * this.medidaTablero);
                     y = Math.floor(Math.random() * this.medidaTablero);
 
@@ -523,30 +526,28 @@ var partida = {
                 return '#93c572';
             case "E":
 
-                this.estrellasEncontradas++;
+                partida.estrellasEncontradas++;
                 this.puntos += 200;
 
-                for (i = 0; i < this.estrellas.length; i++) {
+                for (i = 0; i < partida.estrellas.length; i++) {
 
-                    if (this.estrellas[i].posX == posX && this.estrellas[i].posY == posY) {
+                    if (partida.estrellas[i].posX == posX && partida.estrellas[i].posY == posY) {
 
-                        this.estrellas[i].seleccionado = true;
-
+                        partida.estrellas[i].seleccionado = true;
                     }
+                }
+                
+                if(partida.estrellasEncontradas==5){
+                    setTimeout(function() {
+
+                        alert("HAS GANADO!!!");
+
+                    }, 2000);        
                 }
 
                 this.RevelarTablero();
 
                 this.Estadisticas();
-
-                /* if (this.esSeleccionado(this.estrellas)) {
-
-                    setTimeout(function() {
-
-                        alert("HAS GANADO!!!");
-
-                    }, 2000);
-                } */
 
                 return '#57a639';
             case "G":
@@ -604,24 +605,4 @@ var partida = {
         document.getElementById("stats").innerHTML = ver;
 
     }
-
-    //new function descubrir casilla pillar X y Y y comprovar q no esté descubierta y si no, q la muestre
-
-
-
 }
-
-//document.getElementById("insBoto").addEventListener("click", partida.seleccionarCoordenada);
-/*
-
-    rellenarTabla: function(coordenadas){
-        for(let i = 0;i<coordenadas;i++){
-            this.tablero[i]= [];
-            for(let j = 0;j < coordenadas[i];j++){
-               this.tablero[i][j] = "g";
-            }
-        }
-        this.generarTabla();
-    },
-}
-*/
