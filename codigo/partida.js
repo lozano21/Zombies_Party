@@ -351,6 +351,8 @@ var partida = {
 
         setTimeout(function() {
 
+            enable();
+
             //Resetea todo el tablero a X
             for (let i = 1; i <= partida.tablero.length; i++) {
 
@@ -370,7 +372,10 @@ var partida = {
                 console.log(inp + " " + i + " " + j);
                 document.getElementById(i + "," + j).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '"class="L_cont_cell" />';
             }
+
         }, 3000); //Wait 3 sec
+
+        disable();
 
 
     },
@@ -489,7 +494,10 @@ var partida = {
 
                         alert("HAS PERDIDO!!!");
 
-                    }, 3000);
+                    }, 250);
+
+                    disableAll();
+
                 }
 
                 return '#93c572';
@@ -573,7 +581,7 @@ var partida = {
         ver += "</br>";
         ver += "partidas abandonadas: ";
 
-        document.getElementById("stats").innerHTML = ver;
+        document.getElementById("centerStats").innerHTML = ver;
 
     }
 }

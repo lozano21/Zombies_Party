@@ -15,6 +15,7 @@ window.onload = function() {
 }
 
 let ins = document.getElementById("insBoto");
+let perdut = false;
 
 ins.onclick = function() {
 
@@ -89,52 +90,44 @@ function coordMan(clicked_id){
 
     max = partida.medidaTablero + 1;
 
-    if (posX == "" || posY == "") {
+    if (posX >= 0 && posX < max && posY >= 0 && posY < max) {
 
-        alert("No has dado bien las coordenadas");
+        let ficha = partida.tablero[posX - 1][posY - 1];
+        partida.inputs.push([posX - 1, posY - 1]);
+        console.log("ficha: " + ficha);
 
-    } else {
+        if (ficha.toString() === ficha.toLocaleLowerCase() && perdut != true) {
 
-        if (posX >= 0 && posX < max && posY >= 0 && posY < max) {
+            if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8){
 
-            let ficha = partida.tablero[posX - 1][posY - 1];
-            partida.inputs.push([posX - 1, posY - 1]);
-            console.log("ficha: " + ficha);
+                document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />'; //futuro alt
 
-            if (ficha.toString() === ficha.toLocaleLowerCase()) {
+            } else if (partida.medidaTablero >= 9 && partida.medidaTablero <= 12){
 
-                if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8){
+                document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="M_cont_cell" />'; //futuro alt
 
-                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />'; //futuro alt
+            } else if (partida.medidaTablero >= 13 && partida.medidaTablero <= 17){
 
-                } else if (partida.medidaTablero >= 9 && partida.medidaTablero <= 12){
+                document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="S_cont_cell" />'; //futuro alt
 
-                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="M_cont_cell" />'; //futuro alt
-
-                } else if (partida.medidaTablero >= 13 && partida.medidaTablero <= 17){
-
-                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="S_cont_cell" />'; //futuro alt
-
-                } else {
-
-                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="XS_cont_cell" />'; //futuro alt
-
-                }
-
-
-
-                partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
-                document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(), posX, posY);
-                //TODO funcionalidad de las letras
             } else {
 
-                alert("Ficha descubierta");
+                document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="XS_cont_cell" />'; //futuro alt
 
             }
 
+
+
+            partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
+            document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(), posX, posY);
+            //TODO funcionalidad de las letras
+        } else if (perdut){
+
+            alert("Has perdido, no puedes continuar jugando");
+
         } else {
 
-            alert("Coordenada incorrecta");
+            alert("Ficha descubierta");
 
         }
 
@@ -146,5 +139,19 @@ function clear() {
 
     document.getElementById("posX").value = "";
     document.getElementById("posY").value = "";
+
+}
+
+function disable(){
+
+    document.getElementById("insBoto").disabled = true;
+    document.getElementById("abanBoto").disabled = true;
+
+}
+
+function enable(){
+
+    document.getElementById("insBoto").disabled = false;
+    document.getElementById("abanBoto").disabled = false;
 
 }
