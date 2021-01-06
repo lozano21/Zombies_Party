@@ -1,157 +1,120 @@
 body {
+
     font-family: sans-serif;
+
     width: 100%;
     height: 100%;
+
     margin: 0;
+
 }
 
 #body {
-    position: absolute;
+
     width: 100%;
     height: 100%;
+
     position: relative;
+
 }
 
 input {
+
     text-align: center;
+
 }
 
 
 /* ------------------------------------------ */
 
 #panel {
+
     background-color: turquoise;
+
     height: 100%;
     width: 15%;
+
     position: absolute;
+
 }
 
 #stats {
+
     background-color: palegreen;
     position: absolute;
+
     right: 0;
+
     width: 15%;
     height: 100%;
+
 }
 
 #coord {
+
     text-align: center;
     position: absolute;
+
     top: 10%;
     margin-right: 10px;
+
     width: 100%;
     height: 5%;
+
 }
 
 #X {
+
     position: absolute;
+
     width: 50%;
     height: 55%;
+
 }
 
 #Y {
+
     position: absolute;
+
     left: 50%;
+
     width: 50%;
     height: 55%;
+
 }
 
 #botons {
+
     text-align: center;
     position: absolute;
+
     top: 15%;
+
     height: 10%;
     width: 100%;
+
 }
 
 #ins {
+
     position: absolute;
+
     top: 25%;
+
     width: 100%;
     height: 25%;
+
 }
 
 #abandona {
+
     position: absolute;
+
     top: 75%;
+
     width: 100%;
     height: 25%;
 }
 
 
 /* ------------------------------------------ */
-
-#master {
-    height: 90%;
-    width: auto;
-    position: relative;
-    display: table;
-}
-
-#createTable {
-    background-color: pink;
-    position: absolute;
-    left: 15%;
-    width: 70%;
-    height: 100%;
-}
-
-.row {
-    width: auto;
-    clear: both;
-}
-
-.large_cell {
-    background-color: white;
-    text-align: center;
-    width: 100px;
-    height: 100px;
-    float: left;
-    display: table-column;
-    border: 0.1vw solid black;
-    cursor: pointer;
-    /*display:grid;
-    justify-content: center;
-    align-content: center;*/
-}
-
-.small_cell {
-    background-color: white;
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    float: left;
-    display: table-column;
-    border: 1px solid black;
-    cursor: pointer;
-    /*display:grid;
-    justify-content: center;
-    align-content: center;*/
-}
-
-.cell {
-    background-color: white;
-    text-align: center;
-    /* width: 50px;
-    height: 50px; */
-    float: left;
-    display: table-column;
-    border: 0.1vw solid black;
-    cursor: pointer;
-    /*display:grid;
-    justify-content: center;
-    align-content: center;*/
-}
-
-.L_cont_cell {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-}
-
-.center {
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    margin: auto;
-}

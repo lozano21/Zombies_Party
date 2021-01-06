@@ -42,7 +42,26 @@ function coord() {
             console.log("ficha: " + ficha);
 
             if (ficha.toString() === ficha.toLocaleLowerCase()) {
-                document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />'; //futuro alt
+
+                if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8){
+
+                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />'; //futuro alt
+
+                } else if (partida.medidaTablero >= 9 && partida.medidaTablero <= 12){
+
+                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="M_cont_cell" />'; //futuro alt
+
+                } else if (partida.medidaTablero >= 13 && partida.medidaTablero <= 17){
+
+                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="S_cont_cell" />'; //futuro alt
+
+                } else {
+
+                    document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="XS_cont_cell" />'; //futuro alt
+
+                }
+
+
 
                 partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
                 document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(), posX, posY);
@@ -67,15 +86,4 @@ function clear() {
     document.getElementById("posX").value = "";
     document.getElementById("posY").value = "";
 
-}
-
-
-function inputChangeX() {
-    var x = document.getElementById("posX");
-    x.value = x.value > partida.medidaTablero ? partida.medidaTablero : x.value;
-}
-
-function inputChangeY() {
-    var x = document.getElementById("posY");
-    x.value = x.value > partida.medidaTablero ? partida.medidaTablero : x.value;
 }
