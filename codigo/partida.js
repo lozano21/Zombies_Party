@@ -68,7 +68,7 @@ var partida = {
 
                 if (coordenadas >= 5 && coordenadas <= 8){
 
-                    tablero += "<div id='" + i + "," + j + "' class='large_cell'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
                 } else if (coordenadas >= 9 && coordenadas <= 12) {
 
