@@ -326,19 +326,19 @@ var partida = {
                 return 'imagenes/2x.png';
             case "MZ":
 
-                return 'imagenes/mitadZombie.png';
+                return 'imagenes/meitatzombie.jpg';
             case "VE":
 
                 return 'imagenes/life.png';
             case "Z":
 
-                return 'imagenes/tyrant.png';
+                return 'imagenes/zombie.gif';
             case "E":
 
                 return 'imagenes/star.png';
             case "G":
 
-                return 'imagenes/re2c2.png';
+                return 'imagenes/grass.png';
         }
     },
 
@@ -410,7 +410,7 @@ var partida = {
                 this.zombies[a].seleccionado = true;
                 mitadZombiesDescubiertos--;
 
-                this.getTablero()[this.zombies[a].x][this.zombies[a].y] = 'g';
+                this.tablero[this.zombies[a].x][this.zombies[a].y] = 'g';
 
             }
 
