@@ -9,6 +9,12 @@ body {
 
 }
 
+h2 {
+
+    margin: 0;
+
+}
+
 #body {
 
     width: 100%;
@@ -43,69 +49,67 @@ input {
 
 }
 
-#stats {
+#box {
 
-    background-color: palegreen;
-    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
 
-    right: 0;
+    margin-left: 5%;
+    margin-top: 20%;
 
-    width: 15%;
-    height: 100%;
+    width: 90%;
+    height: 15%;
 
-}
-
-#centerStats {
-
-    width: auto;
-    height: auto;
-
-    margin-left: 15px;
+    bottom: 0;
+    border: 2px solid white;
 
 }
 
 #coord {
 
-    text-align: center;
-    position: absolute;
+    position: relative;
 
-    top: 10%;
-    margin-right: 10px;
+    top: 5%;
 
     width: 100%;
-    height: 5%;
+    height: auto;
 
 }
 
 #X {
 
+    color: white;
+
     position: absolute;
+    text-align: center;
 
     width: 50%;
-    height: 55%;
+    height: 5%;
 
 }
 
 #Y {
 
+    color: white;
+
     position: absolute;
+    text-align: center;
 
     left: 50%;
 
     width: 50%;
-    height: 55%;
+    height: 5%;
 
 }
 
 #botons {
 
+    position: relative;
+
+    top: 40%;
     text-align: center;
-    position: absolute;
 
-    top: 15%;
-
-    height: 10%;
     width: 100%;
+    height: auto;
 
 }
 
@@ -113,10 +117,33 @@ input {
 
     position: absolute;
 
-    top: 25%;
-
     width: 100%;
-    height: 25%;
+    height: 5%;
+
+}
+
+#insBoto {
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid white;
+
+    padding: 7px 15px;
+    cursor: pointer;
+
+    border-radius: 8px;
+
+}
+
+#abanBoto {
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid white;
+
+    padding: 7px 15px;
+    cursor: pointer;
+    border-radius: 8px;
 
 }
 
@@ -124,8 +151,119 @@ input {
 
     position: absolute;
 
-    top: 75%;
+    top: 40px;
 
     width: 100%;
-    height: 25%;
+    height: 5%;
+
+}
+
+/* ESTADÍSTICAS */
+
+#stats {
+
+    position: absolute;
+
+    right: 0;
+
+    width: 15%;
+    height: 100%;
+
+    color: white;
+
+}
+
+#gStats {
+
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+
+
+}
+
+#sTitulo {
+
+    position: relative;
+    text-align: center;
+    padding: 4px;
+
+    top: 3%;
+    left: 3%;
+
+    width: 90%;
+    height: auto;
+
+    border: 2px solid white;
+    border-radius: 10px;
+
+}
+
+#puntos {
+
+    position: relative;
+    text-align: center;
+    padding: 4%;
+
+    top: 5%;
+    left: 22%;
+
+    width: 50%;
+
+    border: 2px solid white;
+    border-radius: 8px;
+
+}
+
+#infoPartida {
+
+    position: relative;
+    padding: 10px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    width: 90%;
+    height: auto;
+
+    top: 8%;
+
+    border: 2px solid white;
+    border-radius: 3px;
+
+}
+
+#global {
+
+    position: relative;
+    padding: 15px;
+
+    top: 45%;
+    right: 5px;
+
+    width: auto;
+    height: 15%;
+
+    border: 2px solid white;
+
+}
+
+#gTitulo {
+
+    position: relative;
+    text-align: center;
+
+    border: 1px solid white;
+    border-radius: 5px;
+
+}
+
+#infoJuego {
+
+    position: relative;
+
+    top: 10%;
+    font-size: 19px;
+
 }
