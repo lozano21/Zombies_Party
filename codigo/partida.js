@@ -487,14 +487,26 @@ var partida = {
 
                 if (this.vidas == 0) {
 
+                    perdidas++;
+                    this.Estadisticas();
+
                     setTimeout(function() {
 
-                        confirm("Los zombies te han devorado\nQuieres volver a jugar?");
+                        let ask = confirm("Los zombies te han devorado\nQuieres volver a jugar?");
                         end();
 
-                    }, 250);
+                        setTimeout(function(){
 
-                    perdidas++;
+                            if (ask) {
+
+                                inicio();
+
+                            }
+
+                        }, 250);
+
+
+                    }, 250);
 
                 }
 
@@ -517,8 +529,19 @@ var partida = {
                 if(partida.estrellasEncontradas==5){
                     setTimeout(function() {
 
-                        alert("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
+                        let ask = confirm("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
                         end();
+
+                        setTimeout(function(){
+
+
+                            if (confirm) {
+
+                                inicio();
+
+                            }
+
+                        }, 250);
 
                     }, 250);
 
@@ -577,9 +600,22 @@ var partida = {
     abandona: function(){
 
         disable();
+        end();
 
         abandonadas++;
         this.Estadisticas();
+
+        setTimeout(function() {
+
+            let ask = confirm("Los zombies te han abrumado la mente.\nQuieres crear otra partida?");
+
+            if(ask){
+
+                inicio();
+
+            }
+
+        }, 250);
 
     }
 }

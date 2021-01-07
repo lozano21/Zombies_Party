@@ -18,7 +18,10 @@ function inicio(){
         console.log(coordenadas);
     }
 
+    document.getElementById("createTable").style.display = "block";
     partida.iniciarJuego(coordenadas);
+
+    enable();
 
 }
 
@@ -164,17 +167,18 @@ function disable(){
 
 }
 
+function enable(){
+
+    document.getElementById("insBoto").disabled = false;
+    document.getElementById("abanBoto").disabled = false;
+
+}
+
 function end() {
 
     disable();
 
     document.getElementById("createTable").style.display = "none";
-
-    setTimeout( function(){
-
-        alert("Si quieres volver a jugar, recarga la página");
-
-    }, 1000);
 
 
 }
