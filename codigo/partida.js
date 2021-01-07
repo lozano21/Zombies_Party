@@ -77,19 +77,19 @@ var partida = {
 
                 if (coordenadas >= 5 && coordenadas <= 8){
 
-                    tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='coordMan(this.id)'><img src='imagenes/casilla.png'></div>";
 
                 } else if (coordenadas >= 9 && coordenadas <= 11) {
 
-                    tablero += "<div id='" + i + "," + j + "' class='medium_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='medium_cell' onclick='coordMan(this.id)'><img src='imagenes/casilla.png'></div>";
 
                 } else if (coordenadas >= 12 && coordenadas <= 16) {
 
-                    tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='coordMan(this.id)'><img src='imagenes/casilla.png'></div>";
 
                 } else {
 
-                    tablero += "<div id='" + i + "," + j + "' class='XS_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='XS_cell' onclick='coordMan(this.id)'><img src='imagenes/casilla.png'></div>";
 
                 }
             }
@@ -364,7 +364,7 @@ var partida = {
             for (let i = 1; i <= partida.tablero.length; i++) {
 
                 for (let j = 1; j <= partida.tablero[0].length; j++) {
-                    document.getElementById(i + "," + j).innerHTML = '<img src="imagenes/equis.png" class="L_cont_cell" />';
+                    document.getElementById(i + "," + j).innerHTML = '<img src="imagenes/casilla.png" class="L_cont_cell" />';
                 }
             }
 
@@ -496,7 +496,7 @@ var partida = {
 
                 if (this.vidas == 0) {
 
-                    localStorage.abandonadas = Number(localStorage.perdidas) + 1;
+                    localStorage.perdidas = Number(localStorage.perdidas) + 1;
 
                     setTimeout(function() {
 
@@ -553,7 +553,7 @@ var partida = {
 
                     }, 250);
 
-                    localStorage.abandonadas = Number(localStorage.ganadas) + 1;
+                    localStorage.ganadas = Number(localStorage.ganadas) + 1;
 
                 }
                 if (partida.casillasSeleccionadas<2){
@@ -597,7 +597,7 @@ var partida = {
         infoJuego += "Partidas abandonadas: " + localStorage.abandonadas;
 
         document.getElementById("sTitulo").innerHTML = "<h2>PUNTUACIONES DEL JUEGO:</h2>"
-        document.getElementById("puntos").innerHTML = "Puntos totales: " + this.puntos;
+        document.getElementById("puntos").innerHTML = "Puntos totales: <br>" + this.puntos;
         document.getElementById("infoPartida").innerHTML = infoPartida;
         document.getElementById("gTitulo").innerHTML = "<h2>ESTADÍSTICAS</h2>";
         document.getElementById("infoJuego").innerHTML = infoJuego;
