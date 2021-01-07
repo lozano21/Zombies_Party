@@ -47,7 +47,7 @@ help.onclick = function(){
     hWindow = window.open(
         "help.html",
         "help",
-        "width=500, height=500"
+        "width=510, height=510"
     );
 
 }
