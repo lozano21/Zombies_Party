@@ -394,17 +394,19 @@ var partida = {
                 zombiesDescubiertos++;
             }
         }
-        var mitadZombiesDescubiertos = Math.trunc(zombiesDescubiertos / 2);
+        var mitadZombiesDescubiertos = Math.trunc(zombiesDescubiertos / 2); //División que devuelve en entero
+        
         a = 0;
         while (mitadZombiesDescubiertos >= 0 && a < this.zombies.length) {
             var z = this.zombies[a];
             if (z.seleccionado == false) {
                 mitadZombiesDescubiertos--;
                 this.tablero[z.x][z.y] = 'g';
-                this.zombies.pop(a);
+                this.zombies.splice(a, 1); //Elimina en la posición a un unico zombie de la lista zombies
             }
             a++;
         }
+        console.log(this.zombies);
         this.Estadisticas();
     },
 
