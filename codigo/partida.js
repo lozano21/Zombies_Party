@@ -326,7 +326,7 @@ var partida = {
                 return 'imagenes/2x.png';
             case "MZ":
 
-                return 'imagenes/meitatzombie.jpg';
+                return 'imagenes/mitadzombie.png';
             case "VE":
 
                 return 'imagenes/life.png';
