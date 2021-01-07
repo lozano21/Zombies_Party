@@ -332,13 +332,13 @@ var partida = {
                 return 'imagenes/life.png';
             case "Z":
 
-                return 'imagenes/zombie.gif';
+                return 'imagenes/tyrant.png';
             case "E":
 
                 return 'imagenes/star.png';
             case "G":
 
-                return 'imagenes/grass.png';
+                return 'imagenes/casilla.png';
         }
     },
 
