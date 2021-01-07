@@ -494,16 +494,27 @@ var partida = {
 
                 this.vidas--;
                 if (this.vidas == 0) {
+
                     localStorage.perdidas = Number(localStorage.perdidas) + 1;
+                    this.updateHighscore();
+
                     setTimeout(function() {
+
                         let ask = confirm("Los zombies te han devorado\nQuieres volver a jugar?");
                         end();
+
                         setTimeout(function() {
+
                             if (ask) {
+
                                 inicio();
+
                             }
+
                         }, 250);
+
                     }, 250);
+
                 }
 
                 this.Estadisticas();
@@ -523,6 +534,9 @@ var partida = {
                 }
 
                 if (partida.estrellasEncontradas == 5) {
+
+                    this.updateHighscore();
+
                     setTimeout(function() {
 
                         let ask = confirm("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
@@ -565,6 +579,7 @@ var partida = {
     Estadisticas: function() {
 
         let infoPartida = "";
+        let hs = "";
         let infoJuego = "";
 
 
@@ -586,7 +601,12 @@ var partida = {
 
         document.getElementById("sTitulo").innerHTML = "<h2>PUNTUACIONES DEL JUEGO:</h2>"
         document.getElementById("puntos").innerHTML = "Puntos totales: <br>" + this.puntos;
+
         document.getElementById("infoPartida").innerHTML = infoPartida;
+
+        document.getElementById("hTitulo").innerHTML = "<h2>PUNTUACIÓN MÁXIMA</h2>";
+        document.getElementById("hPuntos").innerHTML = localStorage.highscore;
+
         document.getElementById("gTitulo").innerHTML = "<h2>ESTADÍSTICAS</h2>";
         document.getElementById("infoJuego").innerHTML = infoJuego;
 
@@ -594,6 +614,7 @@ var partida = {
 
     abandona: function() {
 
+        this.updateHighscore();
         disable();
         end();
 
@@ -645,8 +666,17 @@ var partida = {
             localStorage.ganadas = 0;
             localStorage.perdidas = 0;
             localStorage.abandonadas = 0;
+            localStorage.highscore = 0;
 
         }
+
+    },
+
+
+    updateHighscore: function(){
+
+        localStorage.highscore = Number(localStorage.highscore) + this.puntos;
+        this.Estadisticas();
 
     }
 }

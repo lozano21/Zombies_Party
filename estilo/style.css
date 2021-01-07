@@ -266,13 +266,43 @@ input {
 
 }
 
+#highscore {
+
+    position: relative;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    top: 10%;
+    right: 5px;
+
+    border: 2px solid white;
+    border-radius: 20px;
+
+}
+
+#hTitulo {
+
+    font-size: 15.5px;
+    text-align: center;
+
+}
+
+#hPuntos{
+
+    text-align: center;
+    font-size: 24px;
+
+}
+
+
+
 #global {
 
     position: relative;
     padding: 12px;
     background-color: rgba(0, 0, 0, 0.5);
 
-    top: 45%;
+    top: 33%;
     right: 5px;
 
     width: auto;
