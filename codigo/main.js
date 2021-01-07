@@ -25,9 +25,16 @@ function inicio(){
 
 }
 
-let perdut = false;
 let ins = document.getElementById("insBoto");
 let aban = document.getElementById("abanBoto");
+let help = document.getElementById("helpBoto");
+
+ins.onclick = function() {
+
+    coord();
+    clear();
+
+}
 
 aban.onclick = function() {
 
@@ -35,10 +42,13 @@ aban.onclick = function() {
 
 }
 
-ins.onclick = function() {
+help.onclick = function(){
 
-    coord();
-    clear();
+    hWindow = window.open(
+        "help.html",
+        "help",
+        "width=500, height=500"
+    );
 
 }
 
@@ -114,7 +124,7 @@ function coordMan(clicked_id){
         partida.inputs.push([posX - 1, posY - 1]);
         console.log("ficha: " + ficha);
 
-        if (ficha.toString() === ficha.toLocaleLowerCase() && perdut != true) {
+        if (ficha.toString() === ficha.toLocaleLowerCase()) {
 
             if (partida.medidaTablero >= 5 && partida.medidaTablero <= 8){
 
@@ -134,15 +144,9 @@ function coordMan(clicked_id){
 
             }
 
-
-
             partida.tablero[posX - 1][posY - 1] = ficha.toUpperCase();
             document.getElementById(posX + "," + posY).style.backgroundColor = partida.comprovarLetra(ficha.toUpperCase(), posX, posY);
             //TODO funcionalidad de las letras
-        } else if (perdut){
-
-            alert("Has perdido, no puedes continuar jugando");
-
         } else {
 
             alert("Ficha descubierta");
@@ -182,44 +186,3 @@ function end() {
 
 
 }
-
-/*
-var ganadas = 0;
-var abandonadas = 0;
-var perdidas = 0;
-
-if (document.cookie == ""){
-
-    document.cookie = "ganadas=0";
-    document.cookie = "abandonadas=0";
-    document.cookie = "perdidas=0";
-
-}
-
-function getCookies(cname){
-
-    var cookie = document.cookie;
-    var trescookies = cookie.split(";");
-
-    for (let i = 0; i < trescookies.length; i++){
-
-        trescookies[i] = trescookies[i].trim();
-
-    }
-
-    for (let i = 0; i < trescookies.length; i++){
-
-        let sep = trescookies[i].split("=");
-
-        if (sep[0].trim() == cname){
-
-            return sep[1];
-
-        }
-
-    }
-
-    return "";
-
-}
-*/
