@@ -12,7 +12,7 @@ function inicio(){
     //Se piden las medidas de la tabla
     let coordenadas = parseInt(prompt("Medida del tablero entre 5 y 20"));
 
-    while (coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20) {
+    while (coordenadas == null || coordenadas < 5 || coordenadas > 20) {
 
         coordenadas = parseInt(prompt("La medida debe ser de 5 a 20"));
         console.log(coordenadas);
@@ -183,6 +183,7 @@ function end() {
 
 }
 
+/*
 var ganadas = 0;
 var abandonadas = 0;
 var perdidas = 0;
@@ -197,27 +198,28 @@ if (document.cookie == ""){
 
 function getCookies(cname){
 
-        var cookie = document.cookie;
-        var trescookies = cookie.split(";");
+    var cookie = document.cookie;
+    var trescookies = cookie.split(";");
 
-        for (let i = 0; i < trescookies.length; i++){
+    for (let i = 0; i < trescookies.length; i++){
 
-            trescookies[i] = trescookies[i].trim();
-
-        }
-
-        for (let i = 0; i < trescookies.length; i++){
-
-            let sep = trescookies[i].split("=");
-
-            if (sep[0].trim() == cname){
-
-                return sep[1];
-
-            }
-
-        }
-
-        return "";
+        trescookies[i] = trescookies[i].trim();
 
     }
+
+    for (let i = 0; i < trescookies.length; i++){
+
+        let sep = trescookies[i].split("=");
+
+        if (sep[0].trim() == cname){
+
+            return sep[1];
+
+        }
+
+    }
+
+    return "";
+
+}
+*/

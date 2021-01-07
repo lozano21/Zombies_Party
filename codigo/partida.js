@@ -496,8 +496,7 @@ var partida = {
 
                 if (this.vidas == 0) {
 
-                    perdidas++;
-                    this.Estadisticas();
+                    localStorage.abandonadas = Number(localStorage.perdidas) + 1;
 
                     setTimeout(function() {
 
@@ -554,7 +553,7 @@ var partida = {
 
                     }, 250);
 
-                    ganadas++;
+                    localStorage.abandonadas = Number(localStorage.ganadas) + 1;
 
                 }
                 if (partida.casillasSeleccionadas<2){
@@ -593,9 +592,9 @@ var partida = {
 
         infoPartida += "Vidas: " + this.vidas;
 
-        infoJuego += "Partidas ganadas: " + ganadas + "<br><br>";
-        infoJuego += "Partidas perdidas: " + perdidas + "<br><br>";
-        infoJuego += "Partidas abandonadas: " + abandonadas;
+        infoJuego += "Partidas ganadas: " + localStorage.ganadas + "<br><br>";
+        infoJuego += "Partidas perdidas: " + localStorage.perdidas + "<br><br>";
+        infoJuego += "Partidas abandonadas: " + localStorage.abandonadas;
 
         document.getElementById("sTitulo").innerHTML = "<h2>PUNTUACIONES DEL JUEGO:</h2>"
         document.getElementById("puntos").innerHTML = "Puntos totales: " + this.puntos;
@@ -610,7 +609,7 @@ var partida = {
         disable();
         end();
 
-        abandonadas++;
+        localStorage.abandonadas = Number(localStorage.abandonadas) + 1;
         this.Estadisticas();
 
         setTimeout(function() {
@@ -648,6 +647,18 @@ var partida = {
         this.doblesPuntosEncontrados = 0;
         this.vidas = 3;
         this.casillasSeleccionadas = 0;
+
+    },
+
+    lStorage: function() {
+
+        if (typeof(Storage) !== "undefined"){
+
+            localStorage.ganadas = 0;
+            localStorage.perdidas = 0;
+            localStorage.abandonadas = 0;
+
+        }
 
     }
 }
