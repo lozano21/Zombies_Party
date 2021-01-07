@@ -338,7 +338,7 @@ var partida = {
                 return 'imagenes/star.png';
             case "G":
 
-                return 'imagenes/casilla.png';
+                return 'imagenes/re2c2.png';
         }
     },
 
