@@ -1,5 +1,14 @@
 window.onload = function() {
 
+    inicio();
+
+    //Partida.generarTabla(coordenadas);
+    //Partida.iniciarTablero(coordenadas);
+
+}
+
+function inicio(){
+
     //Se piden las medidas de la tabla
     var coordenadas = parseInt(prompt("Medida del tablero entre 5 y 20"));
 
@@ -10,13 +19,18 @@ window.onload = function() {
     }
 
     partida.iniciarJuego(coordenadas);
-    //Partida.generarTabla(coordenadas);
-    //Partida.iniciarTablero(coordenadas);
 
 }
 
-let ins = document.getElementById("insBoto");
 let perdut = false;
+let ins = document.getElementById("insBoto");
+let aban = document.getElementById("abanBoto");
+
+aban.onclick = function() {
+
+    partida.abandona();
+
+}
 
 ins.onclick = function() {
 
@@ -103,11 +117,11 @@ function coordMan(clicked_id){
 
                 document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="L_cont_cell" />'; //futuro alt
 
-            } else if (partida.medidaTablero >= 9 && partida.medidaTablero <= 12){
+            } else if (partida.medidaTablero >= 9 && partida.medidaTablero <= 11){
 
                 document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="M_cont_cell" />'; //futuro alt
 
-            } else if (partida.medidaTablero >= 13 && partida.medidaTablero <= 17){
+            } else if (partida.medidaTablero >= 12 && partida.medidaTablero <= 16){
 
                 document.getElementById(posX + "," + posY).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '" class="S_cont_cell" />'; //futuro alt
 
@@ -146,12 +160,7 @@ function clear() {
 function disable(){
 
     document.getElementById("insBoto").disabled = true;
-
-}
-
-function enable(){
-
-    document.getElementById("insBoto").disabled = false;
+    document.getElementById("abanBoto").disabled = true;
 
 }
 
@@ -169,3 +178,42 @@ function end() {
 
 
 }
+
+var ganadas = 0;
+var abandonadas = 0;
+var perdidas = 0;
+
+if (document.cookie == ""){
+
+    document.cookie = "ganadas=0";
+    document.cookie = "abandonadas=0";
+    document.cookie = "perdidas=0";
+
+}
+
+function getCookies(cname){
+
+        var cookie = document.cookie;
+        var trescookies = cookie.split(";");
+
+        for (let i = 0; i < trescookies.length; i++){
+
+            trescookies[i] = trescookies[i].trim();
+
+        }
+
+        for (let i = 0; i < trescookies.length; i++){
+
+            let sep = trescookies[i].split("=");
+
+            if (sep[0].trim() == cname){
+
+                return sep[1];
+
+            }
+
+        }
+
+        return "";
+
+    }

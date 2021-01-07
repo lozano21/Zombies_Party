@@ -70,11 +70,11 @@ var partida = {
 
                     tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
-                } else if (coordenadas >= 9 && coordenadas <= 12) {
+                } else if (coordenadas >= 9 && coordenadas <= 11) {
 
                     tablero += "<div id='" + i + "," + j + "' class='medium_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
-                } else if (coordenadas >= 13 && coordenadas <= 17) {
+                } else if (coordenadas >= 12 && coordenadas <= 16) {
 
                     tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
@@ -484,19 +484,21 @@ var partida = {
                 this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100; // ternaria para substituir el if
 
                 this.vidas--;
-                this.Estadisticas();
 
                 if (this.vidas == 0) {
 
                     setTimeout(function() {
 
-                        alert("HAS PERDIDO!!!");
+                        confirm("Los zombies te han devorado\nQuieres volver a jugar?");
                         end();
 
                     }, 250);
 
+                    perdidas++;
 
                 }
+
+                this.Estadisticas();
 
                 return '#93c572';
             case "E":
@@ -515,10 +517,13 @@ var partida = {
                 if(partida.estrellasEncontradas==5){
                     setTimeout(function() {
 
-                        alert("HAS GANADO!!!");
+                        alert("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
                         end();
 
                     }, 250);
+
+                    ganadas++;
+
                 }
                 if (partida.casillasSeleccionadas<2){
                     console.log(partida.casillasSeleccionadas);
@@ -557,15 +562,24 @@ var partida = {
 
         infoPartida += "Vidas: " + this.vidas;
 
-        infoJuego += "Partidas ganadas: " + "<br>";
-        infoJuego += "Partidas perdidas: " + "<br>";
-        infoJuego += "partidas abandonadas: ";
+        infoJuego += "Partidas ganadas: " + ganadas + "<br><br>";
+        infoJuego += "Partidas perdidas: " + perdidas + "<br><br>";
+        infoJuego += "Partidas abandonadas: " + abandonadas;
 
         document.getElementById("sTitulo").innerHTML = "<h2>PUNTUACIONES DEL JUEGO:</h2>"
         document.getElementById("puntos").innerHTML = "Puntos totales: " + this.puntos;
         document.getElementById("infoPartida").innerHTML = infoPartida;
         document.getElementById("gTitulo").innerHTML = "<h2>ESTADÍSTICAS</h2>";
         document.getElementById("infoJuego").innerHTML = infoJuego;
+
+    },
+
+    abandona: function(){
+
+        disable();
+
+        abandonadas++;
+        this.Estadisticas();
 
     }
 }
