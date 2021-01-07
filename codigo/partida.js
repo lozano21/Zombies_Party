@@ -326,19 +326,19 @@ var partida = {
                 return 'imagenes/2x.png';
             case "MZ":
 
-                return 'imagenes/meitatzombie.jpg';
+                return 'imagenes/mitadZombie.png';
             case "VE":
 
                 return 'imagenes/life.png';
             case "Z":
 
-                return 'imagenes/zombie.gif';
+                return 'imagenes/tyrant.png';
             case "E":
 
                 return 'imagenes/star.png';
             case "G":
 
-                return 'imagenes/grass.png';
+                return 'imagenes/re2c2.png';
         }
     },
 
