@@ -411,7 +411,7 @@ var partida = {
                 mitadZombiesDescubiertos--;
 
                 this.tablero[this.zombies[a].x][this.zombies[a].y] = 'g';
-
+                this.Estadisticas();
             }
 
             a++;
