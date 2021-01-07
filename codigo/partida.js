@@ -432,7 +432,7 @@ var partida = {
                 this.puntos = this.puntos * 2; //Dobla la puntuación
                 this.Estadisticas();
 
-                return '#fff';
+                break;
             case "MZ":
 
 
@@ -456,7 +456,7 @@ var partida = {
 
                 this.Estadisticas();
 
-                return '#e62e1b';
+                break;
             case "VE":
                 posX--;
                 posY--;
@@ -477,7 +477,7 @@ var partida = {
                 }
                 this.Estadisticas();
 
-                return '#7FED7E';
+                break;
             case "Z":
 
                 this.zombiesEncontrados++;
@@ -500,7 +500,7 @@ var partida = {
 
                 this.Estadisticas();
 
-                return '#93c572';
+                break;
             case "E":
 
                 partida.estrellasEncontradas++;
@@ -532,16 +532,15 @@ var partida = {
 
                 this.Estadisticas();
 
-                return '#57a639';
+                break;
             case "G":
 
                 this.puntos += 50;
                 this.Estadisticas();
 
-                return '#F09D61';
+                break;
 
         }
-        return '#fff';
     },
 
     Estadisticas: function() {
