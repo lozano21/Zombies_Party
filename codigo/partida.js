@@ -1,4 +1,5 @@
 var partida = {
+
     zombies: [],
     estrellas: [],
     tablero: [],
@@ -19,6 +20,7 @@ var partida = {
     vidas: 3,
     casillasSeleccionadas: 0,
 
+
     //Rellenamos las casillas de campo (consola), e iniciamos tablero del tamaño escogido con G's
     iniciarTablero: function(coordenadas) {
 
@@ -38,6 +40,7 @@ var partida = {
     //Core, inicia todas las funciones por orden
     iniciarJuego: function(coordenadas) {
 
+        this.reinicio();
         this.medidaTablero = coordenadas;
         this.iniciarTablero(coordenadas);
         this.crearRecompensas();
@@ -46,9 +49,15 @@ var partida = {
         this.generarTabla(coordenadas);
         this.Estadisticas();
 
+        if (this.medidaTablero > 10){
+            document.getElementById("posX").maxLength = 2;
+            document.getElementById("posY").maxLength = 2;
+        }
+
+        /*
         document.getElementById("posX").maxLength = this.medidaTablero >= 10 ? 2 : 1;
         document.getElementById("posY").maxLength = this.medidaTablero >= 10 ? 2 : 1;
-
+        */
 
     },
 
@@ -292,7 +301,7 @@ var partida = {
         return this.tablero;
 
     },
-
+    /*
     esSeleccionado: function(seleccion) {
 
         var sel = true;
@@ -308,7 +317,7 @@ var partida = {
 
         return sel;
     },
-
+    */
     GetImageByLetter: function(ficha) {
         switch (ficha.toUpperCase()) {
 
@@ -487,14 +496,26 @@ var partida = {
 
                 if (this.vidas == 0) {
 
+                    perdidas++;
+                    this.Estadisticas();
+
                     setTimeout(function() {
 
-                        confirm("Los zombies te han devorado\nQuieres volver a jugar?");
+                        let ask = confirm("Los zombies te han devorado\nQuieres volver a jugar?");
                         end();
 
-                    }, 250);
+                        setTimeout(function(){
 
-                    perdidas++;
+                            if (ask) {
+
+                                inicio();
+
+                            }
+
+                        }, 250);
+
+
+                    }, 250);
 
                 }
 
@@ -517,8 +538,19 @@ var partida = {
                 if(partida.estrellasEncontradas==5){
                     setTimeout(function() {
 
-                        alert("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
+                        let ask = confirm("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
                         end();
+
+                        setTimeout(function(){
+
+
+                            if (confirm) {
+
+                                inicio();
+
+                            }
+
+                        }, 250);
 
                     }, 250);
 
@@ -576,9 +608,46 @@ var partida = {
     abandona: function(){
 
         disable();
+        end();
 
         abandonadas++;
         this.Estadisticas();
+
+        setTimeout(function() {
+
+            let ask = confirm("Los zombies te han abrumado la mente.\nQuieres crear otra partida?");
+
+            if(ask){
+
+                inicio();
+
+            }
+
+        }, 250);
+
+    },
+
+    reinicio: function(){
+
+        this.zombies = [];
+        this.estrellas = [];
+        this.tablero = [];
+        this.inputs = [];
+        this.recompensasCreadas = 0;
+        this.medidaTablero = 5;
+        this.mitadZombie = [];
+        this.doblePuntos = [];
+        this.vidaExtra = [];
+        this.zombiesCreados = 0;
+        this.estrellasCreadas = 0;
+        this.puntos = 0;
+        this.estrellasEncontradas = 0;
+        this.vidasExtrasEncontradas = 0;
+        this.zombiesEncontrados = 0;
+        this.mitadZombiesEncontrados = 0;
+        this.doblesPuntosEncontrados = 0;
+        this.vidas = 3;
+        this.casillasSeleccionadas = 0;
 
     }
 }

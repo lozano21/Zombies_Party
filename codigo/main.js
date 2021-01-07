@@ -10,7 +10,7 @@ window.onload = function() {
 function inicio(){
 
     //Se piden las medidas de la tabla
-    var coordenadas = parseInt(prompt("Medida del tablero entre 5 y 20"));
+    let coordenadas = parseInt(prompt("Medida del tablero entre 5 y 20"));
 
     while (coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20) {
 
@@ -18,7 +18,10 @@ function inicio(){
         console.log(coordenadas);
     }
 
+    document.getElementById("createTable").style.display = "block";
     partida.iniciarJuego(coordenadas);
+
+    enable();
 
 }
 
@@ -164,17 +167,18 @@ function disable(){
 
 }
 
+function enable(){
+
+    document.getElementById("insBoto").disabled = false;
+    document.getElementById("abanBoto").disabled = false;
+
+}
+
 function end() {
 
     disable();
 
     document.getElementById("createTable").style.display = "none";
-
-    setTimeout( function(){
-
-        alert("Si quieres volver a jugar, recarga la página");
-
-    }, 1000);
 
 
 }
