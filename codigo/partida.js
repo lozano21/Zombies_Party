@@ -60,27 +60,29 @@ var partida = {
 
         let tablero = "<div id='master' class='center'>";
 
-        /* Pilla el tamaño de la página escogiendo entre todos los delimitadores de tamaño de
-           la pagina el mas grande*/
-        var body = document.body, html = document.documentElement;
-        var height = Math.max(body.scrollHeight, body.offsetHeight, html.scrollHeight, html.offsetHeight, html.clientHeight, body.clientHeight);
-        var width = Math.max(body.scrollWidth, body.offsetWidth, html.scrollWidth, html.offsetWidth, html.clientWidth, body.clientWidth);
-
-        /* Escoge el mas pequeño de ambas medidas para que se 
-           redimensione de forma acorde y quepa en la página*/
-        height = Math.min(height, width);
-        var size = (height / partida.medidaTablero)*0.85;
-        size = size * (100/Math.max(html.clientWidth, html.clientHeight)); // De Px a vw/vh (viewportWidth, viewportHeight)
-
-        // Bucle que crea las casillas de la tabla
         for (let i = 1; i < coordenadas + 1; i++) {
+
             tablero += "<div class='row'>";
+
             for (let j = 1; j < coordenadas + 1; j++) {
-                /* La ternaria de height y width son una continuación del size de arriba, sirve para
-                 saber cuál debe usar dependiendo de si la pagina es mas grande vertical o horizontalmente*/
-                tablero += "<div id='" + i + "," + j + "' class='cell' style='height:"+size+(height>width?"vh":"vw")+"; width:"+size+(height>width?"vh":"vw")+";' "+
-                "onclick='seleccionarCoordenadas()'>";
-                tablero += '<img src="imagenes/equis.png" class="L_cont_cell" /></div>';
+
+                if (coordenadas >= 5 && coordenadas <= 8){
+
+                    tablero += "<div id='" + i + "," + j + "' class='large_cell'><img src='imagenes/equis.png'></div>";
+
+                } else if (coordenadas >= 9 && coordenadas <= 12) {
+
+                    tablero += "<div id='" + i + "," + j + "' class='medium_cell'><img src='imagenes/equis.png'></div>";
+
+                } else if (coordenadas >= 13 && coordenadas <= 17) {
+
+                    tablero += "<div id='" + i + "," + j + "' class='small_cell'><img src='imagenes/equis.png'></div>";
+
+                } else {
+
+                    tablero += "<div id='" + i + "," + j + "' class='XS_cell'><img src='imagenes/equis.png'></div>";
+
+                }
             }
             tablero += "</div>";
         }
