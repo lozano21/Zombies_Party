@@ -46,9 +46,15 @@ var partida = {
         this.generarTabla(coordenadas);
         this.Estadisticas();
 
+        if (this.medidaTablero > 10){
+            document.getElementById("posX").maxLength = 2;
+            document.getElementById("posY").maxLength = 2;
+        }
+
+        /*
         document.getElementById("posX").maxLength = this.medidaTablero >= 10 ? 2 : 1;
         document.getElementById("posY").maxLength = this.medidaTablero >= 10 ? 2 : 1;
-
+        */
 
     },
 
