@@ -10,7 +10,7 @@ window.onload = function() {
 function inicio(){
 
     //Se piden las medidas de la tabla
-    var coordenadas = parseInt(prompt("Medida del tablero entre 5 y 20"));
+    let coordenadas = parseInt(prompt("Medida del tablero entre 5 y 20"));
 
     while (coordenadas === "" || coordenadas == null || coordenadas < 5 || coordenadas > 20) {
 

@@ -1,4 +1,5 @@
 var partida = {
+
     zombies: [],
     estrellas: [],
     tablero: [],
@@ -19,6 +20,7 @@ var partida = {
     vidas: 3,
     casillasSeleccionadas: 0,
 
+
     //Rellenamos las casillas de campo (consola), e iniciamos tablero del tamaño escogido con G's
     iniciarTablero: function(coordenadas) {
 
@@ -38,6 +40,7 @@ var partida = {
     //Core, inicia todas las funciones por orden
     iniciarJuego: function(coordenadas) {
 
+        this.reinicio();
         this.medidaTablero = coordenadas;
         this.iniciarTablero(coordenadas);
         this.crearRecompensas();
@@ -298,7 +301,7 @@ var partida = {
         return this.tablero;
 
     },
-
+    /*
     esSeleccionado: function(seleccion) {
 
         var sel = true;
@@ -314,7 +317,7 @@ var partida = {
 
         return sel;
     },
-
+    */
     GetImageByLetter: function(ficha) {
         switch (ficha.toUpperCase()) {
 
@@ -622,6 +625,30 @@ var partida = {
             }
 
         }, 250);
+
+    },
+
+    reinicio: function(){
+
+        this.zombies = [];
+        this.estrellas = [];
+        this.tablero = [];
+        this.inputs = [];
+        this.recompensasCreadas = 0;
+        this.medidaTablero = 5;
+        this.mitadZombie = [];
+        this.doblePuntos = [];
+        this.vidaExtra = [];
+        this.zombiesCreados = 0;
+        this.estrellasCreadas = 0;
+        this.puntos = 0;
+        this.estrellasEncontradas = 0;
+        this.vidasExtrasEncontradas = 0;
+        this.zombiesEncontrados = 0;
+        this.mitadZombiesEncontrados = 0;
+        this.doblesPuntosEncontrados = 0;
+        this.vidas = 3;
+        this.casillasSeleccionadas = 0;
 
     }
 }
