@@ -62,25 +62,25 @@ var partida = {
 
         for (let i = 1; i < coordenadas + 1; i++) {
 
-            tablero += "<div class='row'>";
+            tablero += "<div id='row' class='row'>";
 
             for (let j = 1; j < coordenadas + 1; j++) {
 
                 if (coordenadas >= 5 && coordenadas <= 8){
 
-                    tablero += "<div id='" + i + "," + j + "' class='large_cell'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
-                } else if (coordenadas >= 9 && coordenadas <= 12) {
+                } else if (coordenadas >= 9 && coordenadas <= 11) {
 
-                    tablero += "<div id='" + i + "," + j + "' class='medium_cell'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='medium_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
-                } else if (coordenadas >= 13 && coordenadas <= 17) {
+                } else if (coordenadas >= 12 && coordenadas <= 16) {
 
-                    tablero += "<div id='" + i + "," + j + "' class='small_cell'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='small_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
                 } else {
 
-                    tablero += "<div id='" + i + "," + j + "' class='XS_cell'><img src='imagenes/equis.png'></div>";
+                    tablero += "<div id='" + i + "," + j + "' class='XS_cell' onclick='coordMan(this.id)'><img src='imagenes/equis.png'></div>";
 
                 }
             }
@@ -369,8 +369,11 @@ var partida = {
                 let ficha = partida.tablero[i - 1][j - 1];
                 console.log(inp + " " + i + " " + j);
                 document.getElementById(i + "," + j).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '"class="L_cont_cell" />';
+
             }
+
         }, 3000); //Wait 3 sec
+
 
 
     },
@@ -481,16 +484,21 @@ var partida = {
                 this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100; // ternaria para substituir el if
 
                 this.vidas--;
-                this.Estadisticas();
 
                 if (this.vidas == 0) {
 
                     setTimeout(function() {
 
-                        alert("HAS PERDIDO!!!");
+                        confirm("Los zombies te han devorado\nQuieres volver a jugar?");
+                        end();
 
-                    }, 3000);
+                    }, 250);
+
+                    perdidas++;
+
                 }
+
+                this.Estadisticas();
 
                 return '#93c572';
             case "E":
@@ -509,9 +517,13 @@ var partida = {
                 if(partida.estrellasEncontradas==5){
                     setTimeout(function() {
 
-                        alert("HAS GANADO!!!");
+                        alert("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
+                        end();
 
-                    }, 2000);        
+                    }, 250);
+
+                    ganadas++;
+
                 }
                 if (partida.casillasSeleccionadas<2){
                     console.log(partida.casillasSeleccionadas);
@@ -534,46 +546,40 @@ var partida = {
 
     Estadisticas: function() {
 
-        var ver;
+        let infoPartida = "";
+        let infoJuego = "";
 
-        ver = "<H2>PUNTUACIONES DEL JUEGO:</H2>"
-        ver += "Puntos totales: " + this.puntos;
-        ver += "</br>";
-        ver += "</br>";
-        ver += "Estrellas: " + this.estrellas.length;
-        ver += "</br>";
-        ver += "Estrellas encontradas: " + this.estrellasEncontradas;
-        ver += "</br>";
-        ver += "Zombies: " + this.zombies.length;
-        ver += "</br>";
-        ver += "Zombies encontrados: " + this.zombiesEncontrados;
-        ver += "</br>";
-        ver += "Puntos dobles: " + this.doblePuntos.length;
-        ver += "</br>";
-        ver += "Puntos dobles encontrados: " + this.doblesPuntosEncontrados;
-        ver += "</br>";
-        ver += "Vidas extra: " + this.vidaExtra.length;
-        ver += "</br>";
-        ver += "Vidas extra encontradas: " + this.vidasExtrasEncontradas;
-        ver += "</br>";
-        ver += "Mitad zombie: " + this.mitadZombie.length;
-        ver += "</br>";
-        ver += "Mitad zombie encontrados: " + this.mitadZombiesEncontrados;
-        ver += "</br>";
-        ver += "Vidas: " + this.vidas;
-        ver += "</br>";
-        ver += "</br>";
-        ver += "</br>";
-        ver += "</br>";
-        ver += "ESTADISTICAS:";
-        ver += "</br>";
-        ver += "Partidas ganadas: ";
-        ver += "</br>";
-        ver += "Partidas perdidas: ";
-        ver += "</br>";
-        ver += "partidas abandonadas: ";
 
-        document.getElementById("stats").innerHTML = ver;
+        infoPartida += "Estrellas: " + this.estrellasEncontradas + " / " + this.estrellas.length + "<br><br>";
+
+        infoPartida += "Zombies: " + this.zombiesEncontrados + " / " + this.zombies.length + "<br><br>";
+
+        infoPartida += "Puntos dobles: " + this.doblesPuntosEncontrados + " / " + this.doblePuntos.length + "<br><br>";
+
+        infoPartida += "Vidas extra: " + this.vidasExtrasEncontradas + " / " + this.vidaExtra.length + "<br><br>";
+
+        infoPartida += "Mitad zombie: " + this.mitadZombiesEncontrados + " / " + this.mitadZombie.length + "<br><br>";
+
+        infoPartida += "Vidas: " + this.vidas;
+
+        infoJuego += "Partidas ganadas: " + ganadas + "<br><br>";
+        infoJuego += "Partidas perdidas: " + perdidas + "<br><br>";
+        infoJuego += "Partidas abandonadas: " + abandonadas;
+
+        document.getElementById("sTitulo").innerHTML = "<h2>PUNTUACIONES DEL JUEGO:</h2>"
+        document.getElementById("puntos").innerHTML = "Puntos totales: " + this.puntos;
+        document.getElementById("infoPartida").innerHTML = infoPartida;
+        document.getElementById("gTitulo").innerHTML = "<h2>ESTADÍSTICAS</h2>";
+        document.getElementById("infoJuego").innerHTML = infoJuego;
+
+    },
+
+    abandona: function(){
+
+        disable();
+
+        abandonadas++;
+        this.Estadisticas();
 
     }
 }
