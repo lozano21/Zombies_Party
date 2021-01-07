@@ -49,7 +49,7 @@ var partida = {
         this.generarTabla(coordenadas);
         this.Estadisticas();
 
-        if (this.medidaTablero > 10){
+        if (this.medidaTablero > 10) {
             document.getElementById("posX").maxLength = 2;
             document.getElementById("posY").maxLength = 2;
         }
@@ -75,7 +75,7 @@ var partida = {
 
             for (let j = 1; j < coordenadas + 1; j++) {
 
-                if (coordenadas >= 5 && coordenadas <= 8){
+                if (coordenadas >= 5 && coordenadas <= 8) {
 
                     tablero += "<div id='" + i + "," + j + "' class='large_cell' onclick='coordMan(this.id)'><img src='imagenes/casilla.png'></div>";
 
@@ -96,7 +96,7 @@ var partida = {
             tablero += "</div>";
         }
         tablero += "</div>";
-        
+
         // Mete dentro del elemento createTable todo el string tablero que pasa a ser HTML de verdad
         document.getElementById('createTable').innerHTML = tablero;
     },
@@ -241,14 +241,15 @@ var partida = {
     //ZOMBIES = Crea Z en el tablero ocupando un 25%
     crearZombies: function() {
 
-        var cz = new zombie();
-
         while (this.zombiesCreados < ((this.medidaTablero * this.medidaTablero) * 25) / 100) {
+            var cz = new zombie();
+            cz.seleccionado = false;
 
+            var x = 0, y = 0;
             do {
 
-                var x = Math.floor(Math.random() * this.medidaTablero);
-                var y = Math.floor(Math.random() * this.medidaTablero);
+                x = Math.floor(Math.random() * this.medidaTablero);
+                y = Math.floor(Math.random() * this.medidaTablero);
 
             } while (this.tablero[x][y] != "g");
 
@@ -258,7 +259,6 @@ var partida = {
             this.tablero[x][y] = "z";
             this.zombiesCreados++;
             this.zombies.push(cz);
-
         }
     },
 
@@ -388,34 +388,24 @@ var partida = {
     },
 
     eliminarMitadZombies: function() {
-
-        let zombiesDescubiertos = 0;
-
+        var zombiesDescubiertos = 0;
         for (i = 0; i != this.zombies.length; i++) {
-
-            if (this.zombies[i].seleccionado == false) {
-
+            if (!this.zombies[i].seleccionado) {
                 zombiesDescubiertos++;
-
             }
         }
-
-        let mitadZombiesDescubiertos = (zombiesDescubiertos / 2);
+        var mitadZombiesDescubiertos = Math.trunc(zombiesDescubiertos / 2);
         a = 0;
-
-        while (mitadZombiesDescubiertos >= 0) {
-
-            if (!this.zombies[a].seleccionado) {
-
-                this.zombies[a].seleccionado = true;
+        while (mitadZombiesDescubiertos >= 0 && a < this.zombies.length) {
+            var z = this.zombies[a];
+            if (z.seleccionado == false) {
                 mitadZombiesDescubiertos--;
-
-                this.tablero[this.zombies[a].x][this.zombies[a].y] = 'g';
-                this.Estadisticas();
+                this.tablero[z.x][z.y] = 'g';
+                this.zombies.pop(a);
             }
-
             a++;
         }
+        this.Estadisticas();
     },
 
     comprovarLetra: function(letra, posX, posY) {
@@ -492,35 +482,33 @@ var partida = {
                 this.zombiesEncontrados++;
                 this.puntos = this.puntos - 100 < 0 ? 0 : this.puntos - 100; // ternaria para substituir el if
 
+                posX--;
+                posY--;
+                
+                for (let i = 0; i < partida.zombies.length; i++) {
+                    if(partida.zombies[i].x == posX && partida.zombies[i].y == posY){
+                        partida.zombies[i].seleccionado = true;
+                        break;
+                    }
+                }
+
                 this.vidas--;
-
                 if (this.vidas == 0) {
-
                     localStorage.perdidas = Number(localStorage.perdidas) + 1;
-
                     setTimeout(function() {
-
                         let ask = confirm("Los zombies te han devorado\nQuieres volver a jugar?");
                         end();
-
-                        setTimeout(function(){
-
+                        setTimeout(function() {
                             if (ask) {
-
                                 inicio();
-
                             }
-
                         }, 250);
-
-
                     }, 250);
-
                 }
 
                 this.Estadisticas();
-
                 break;
+
             case "E":
 
                 partida.estrellasEncontradas++;
@@ -533,14 +521,14 @@ var partida = {
                         partida.estrellas[i].seleccionado = true;
                     }
                 }
-                
-                if(partida.estrellasEncontradas==5){
+
+                if (partida.estrellasEncontradas == 5) {
                     setTimeout(function() {
 
                         let ask = confirm("Enhorabuena, has erradicado a los zombies!\nQuieres volver a jugar?");
                         end();
 
-                        setTimeout(function(){
+                        setTimeout(function() {
 
 
                             if (confirm) {
@@ -556,7 +544,7 @@ var partida = {
                     localStorage.ganadas = Number(localStorage.ganadas) + 1;
 
                 }
-                if (partida.casillasSeleccionadas<2){
+                if (partida.casillasSeleccionadas < 2) {
                     console.log(partida.casillasSeleccionadas);
                     this.RevelarTablero();
                 }
@@ -604,7 +592,7 @@ var partida = {
 
     },
 
-    abandona: function(){
+    abandona: function() {
 
         disable();
         end();
@@ -616,7 +604,7 @@ var partida = {
 
             let ask = confirm("Los zombies te han abrumado la mente.\nQuieres crear otra partida?");
 
-            if(ask){
+            if (ask) {
 
                 inicio();
 
@@ -626,7 +614,7 @@ var partida = {
 
     },
 
-    reinicio: function(){
+    reinicio: function() {
 
         this.zombies = [];
         this.estrellas = [];
@@ -652,7 +640,7 @@ var partida = {
 
     lStorage: function() {
 
-        if (typeof(Storage) !== "undefined"){
+        if (typeof(Storage) !== "undefined") {
 
             localStorage.ganadas = 0;
             localStorage.perdidas = 0;
