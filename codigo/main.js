@@ -1,6 +1,7 @@
 window.onload = function() {
 
     inicio();
+    partida.lStorage();
 
     //Partida.generarTabla(coordenadas);
     //Partida.iniciarTablero(coordenadas);
