@@ -62,7 +62,7 @@ var partida = {
 
         for (let i = 1; i < coordenadas + 1; i++) {
 
-            tablero += "<div class='row'>";
+            tablero += "<div id='row' class='row'>";
 
             for (let j = 1; j < coordenadas + 1; j++) {
 
@@ -351,8 +351,6 @@ var partida = {
 
         setTimeout(function() {
 
-            enable();
-
             //Resetea todo el tablero a X
             for (let i = 1; i <= partida.tablero.length; i++) {
 
@@ -371,11 +369,11 @@ var partida = {
                 let ficha = partida.tablero[i - 1][j - 1];
                 console.log(inp + " " + i + " " + j);
                 document.getElementById(i + "," + j).innerHTML = '<img src="' + partida.GetImageByLetter(ficha) + '"class="L_cont_cell" />';
+
             }
 
         }, 3000); //Wait 3 sec
 
-        disable();
 
 
     },
@@ -493,10 +491,10 @@ var partida = {
                     setTimeout(function() {
 
                         alert("HAS PERDIDO!!!");
+                        end();
 
                     }, 250);
 
-                    disableAll();
 
                 }
 
@@ -518,8 +516,9 @@ var partida = {
                     setTimeout(function() {
 
                         alert("HAS GANADO!!!");
+                        end();
 
-                    }, 2000);        
+                    }, 250);
                 }
                 if (partida.casillasSeleccionadas<2){
                     console.log(partida.casillasSeleccionadas);

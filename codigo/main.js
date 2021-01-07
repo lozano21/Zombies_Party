@@ -12,6 +12,7 @@ window.onload = function() {
     partida.iniciarJuego(coordenadas);
     //Partida.generarTabla(coordenadas);
     //Partida.iniciarTablero(coordenadas);
+
 }
 
 let ins = document.getElementById("insBoto");
@@ -145,13 +146,26 @@ function clear() {
 function disable(){
 
     document.getElementById("insBoto").disabled = true;
-    document.getElementById("abanBoto").disabled = true;
 
 }
 
 function enable(){
 
     document.getElementById("insBoto").disabled = false;
-    document.getElementById("abanBoto").disabled = false;
+
+}
+
+function end() {
+
+    disable();
+
+    document.getElementById("createTable").style.display = "none";
+
+    setTimeout( function(){
+
+        alert("Si quieres volver a jugar, recarga la página");
+
+    }, 1000);
+
 
 }
